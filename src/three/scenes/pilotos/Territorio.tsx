@@ -137,7 +137,7 @@ export default function Territorio() {
         <shaderMaterial vertexShader={vert} fragmentShader={frag} uniforms={uni} extensions={{ derivatives: true } as any} />
       </mesh>
       <mesh ref={mar} rotation-x={-Math.PI / 2}>
-        <planeGeometry args={[W * 1.6, D * 1.6]} />
+        <circleGeometry args={[W * 0.62, 96]} />
         <meshPhysicalMaterial color="#1c5f6e" transparent opacity={0} roughness={0.08} metalness={0.2} clearcoat={1} />
       </mesh>
       <group ref={g.base}>

@@ -69,10 +69,9 @@ export default function Oportunidad() {
       </mesh>
       <mesh ref={plano} rotation-y={Math.PI / 2} position={[0, 18, 0]}>
         <planeGeometry args={[100, 40]} />
-        <meshBasicMaterial color="#D5FF3F" transparent opacity={0.07} side={THREE.DoubleSide} depthWrite={false} />
+        <meshBasicMaterial color="#D5FF3F" transparent opacity={0.035} side={THREE.DoubleSide} depthWrite={false} />
       </mesh>
       <gridHelper args={[160, 40, '#2a2d34', '#15171c']} position={[0, -0.01, 0]} />
-      <mesh visible={false}><boxGeometry args={[n, 1, 1]} /></mesh>
     </group>
   );
 }

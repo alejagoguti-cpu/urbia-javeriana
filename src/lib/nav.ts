@@ -50,7 +50,8 @@ export const seguirScroll = () => lenis?.start();
 export function posDe(idx: number, sub?: number) {
   const e = ESCENAS[idx];
   const hold = idx === ESCENAS.length - 1 ? e.len : e.len - TRANS;
-  if (e.id === 'pilotos' && sub !== undefined) return START[idx] + hold * ((sub + 0.5) / 5.0) * (sub >= 5 ? 0.98 : 1) - (sub === 0 ? hold * 0.08 : 0);
+  // la meseta de cada parada k está centrada en x = k (ver subPilotos)
+  if (e.id === 'pilotos' && sub !== undefined) return START[idx] + hold * Math.min(0.995, (sub + 0.02) / 5);
   if (e.id === 'hero') return START[idx] + hold * 0.98;
   return START[idx] + hold * 0.55;
 }

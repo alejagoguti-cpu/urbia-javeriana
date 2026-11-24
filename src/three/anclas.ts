@@ -37,7 +37,7 @@ const lerpCam = (a: Cam, b: Cam, k: number): Cam => ({
 function camPiloto(k: number, A: THREE.Vector3): Cam {
   if (k <= 0 || k >= 5) {
     const r = k >= 5 ? 1 : 0;
-    return { p: A.clone().add(V(-40 + r * 60, 230 - r * 40, 300 + r * 40)), t: A.clone().add(V(0, -10, -20)), fov: 42 };
+    return { p: A.clone().add(V(-30 + r * 50, 175 - r * 30, 235 + r * 30)), t: A.clone().add(V(0, -10, -20)), fov: 42 };
   }
   const u = UNIVERSO[k - 1];
   const c = A.clone().add(u);

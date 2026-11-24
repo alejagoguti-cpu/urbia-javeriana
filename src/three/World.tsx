@@ -19,6 +19,9 @@ import Evaluacion3D from './scenes/Evaluacion3D';
 import Ruta3D from './scenes/Ruta3D';
 import Final3D from './scenes/Final3D';
 
+// desplazamiento del encuadre: deja el modelo a la derecha cuando hay texto a la izquierda
+const ENCUADRE: Partial<Record<EscenaId, number>> = { hero: 0.2, origen: 0.22, oportunidad: 0.05, metodo: 0.17, pilotos: 0.16, cronograma: 0.16, lab: 0.24, evaluacion: 0.2, ruta: 0.2 };
+
 const COMP: Record<EscenaId, () => JSX.Element> = {
   intro: Intro, hero: Hero, origen: Red, oportunidad: Oportunidad, metodo: Metodo, pilotos: Pilotos,
   cronograma: Cronograma3D, lab: Lab3D, evaluacion: Evaluacion3D, ruta: Ruta3D, final: Final3D,
@@ -26,7 +29,8 @@ const COMP: Record<EscenaId, () => JSX.Element> = {
 
 function Rig() {
   const { camera } = useThree();
-  const cur = useRef({ p: new THREE.Vector3(0, 0, 40), t: new THREE.Vector3(), fov: 40, ini: false });
+  const cur = useRef({ p: new THREE.Vector3(0, 0, 40), t: new THREE.Vector3(), fov: 40, ini: false, enc: 0 });
+  const { size } = useThree();
   useFrame((_, dt) => {
     S.t += dt;
     const { i, lp, tt } = lectura();
@@ -53,6 +57,11 @@ function Rig() {
     camera.position.copy(c.p);
     camera.lookAt(c.t);
     const pc = camera as THREE.PerspectiveCamera;
+    const movil = size.width < 820;
+    let enc = movil ? 0 : (ENCUADRE[ESCENAS[tt > 0.5 ? Math.min(i + 1, ESCENAS.length - 1) : i].id] ?? 0);
+    if (id === 'pilotos' && tt < 0.5) { const s = useSt.getState().sub; if (s === 0 || s === 5) enc = 0.12; }
+    c.enc += (enc - c.enc) * lam * 0.6;
+    pc.setViewOffset(size.width, size.height, -c.enc * size.width, 0, size.width, size.height);
     if (Math.abs(pc.fov - c.fov) > 0.01) { pc.fov = c.fov; pc.updateProjectionMatrix(); }
   });
   return null;

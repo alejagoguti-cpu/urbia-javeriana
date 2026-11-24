@@ -12,9 +12,9 @@ for (const ch of 'urbia') {
 const out = `// generado por tools/logo.mjs desde urbia-logo-monocromo.svg (Manrope 700)
 export const LOGO_TEXTO = ${JSON.stringify(d)};
 // esquina-flecha del logo: M646 76h57v57, trazo 17
-export const LOGO_ESQUINA = { x: 646, y: 76, w: 57, h: 57, trazo: 17 };
+export const LOGO_ESQUINA = { x: ${(x + 4).toFixed(0)}, y: 82, w: 57, h: 57, trazo: 17 };
 export const LOGO_ANCHO_TEXTO = ${x.toFixed(1)};
 `;
 fs.writeFileSync('src/lib/logoPath.ts', out);
-fs.writeFileSync('public-logo-test.svg', `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 320"><rect width="900" height="320" fill="#fff"/><path d="${d}" fill="#171916"/><path d="M646 76h57v57" stroke="#171916" stroke-width="17" fill="none"/></svg>`);
+
 console.log('ok', x, d.length);

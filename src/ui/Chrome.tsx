@@ -4,13 +4,13 @@ import { ESCENAS, PILOTOS, AUTORAS } from '../data/contenido';
 import { S, TOTAL, useSt } from '../store';
 import { irEscena, pantallaCompleta, volver, siguiente } from '../lib/nav';
 import { activarSonido } from '../lib/sonido';
-import { LOGO_TEXTO } from '../lib/logoPath';
+import { LOGO_TEXTO, LOGO_ESQUINA } from '../lib/logoPath';
 
 export function LogoSVG({ className = '' }: { className?: string }) {
   return (
-    <svg className={className} viewBox="60 50 660 190" aria-label="urbia">
+    <svg className={className} viewBox="60 50 520 190" aria-label="urbia">
       <path d={LOGO_TEXTO} fill="currentColor" />
-      <path d="M646 76h57v57" stroke="var(--lima)" strokeWidth="17" fill="none" />
+      <path d={`M${LOGO_ESQUINA.x} ${LOGO_ESQUINA.y}h${LOGO_ESQUINA.w}v${LOGO_ESQUINA.h}`} stroke="var(--lima)" strokeWidth="17" fill="none" />
     </svg>
   );
 }
