@@ -20,7 +20,7 @@ import Ruta3D from './scenes/Ruta3D';
 import Final3D from './scenes/Final3D';
 
 // desplazamiento del encuadre: deja el modelo a la derecha cuando hay texto a la izquierda
-const ENCUADRE: Partial<Record<EscenaId, number>> = { hero: 0.2, origen: 0.22, oportunidad: 0.05, metodo: 0.17, pilotos: 0.16, cronograma: 0.16, lab: 0.24, evaluacion: 0.2, ruta: 0.2 };
+const ENCUADRE: Partial<Record<EscenaId, number>> = { hero: 0.2, origen: 0.22, oportunidad: 0.05, metodo: 0.17, pilotos: 0.16, cronograma: 0.16, lab: 0.24, evaluacion: 0.2, ruta: 0.2, final: 0.3 };
 
 const COMP: Record<EscenaId, () => JSX.Element> = {
   intro: Intro, hero: Hero, origen: Red, oportunidad: Oportunidad, metodo: Metodo, pilotos: Pilotos,
@@ -95,10 +95,10 @@ export default function World() {
       <directionalLight position={[60, 120, 40]} intensity={1.4} color="#f4f3ef" />
       <directionalLight position={[-80, 30, -60]} intensity={0.6} color="#304FFE" />
       <Environment resolution={256} frames={1}>
-        <Lightformer intensity={4} color="#F4F3EF" position={[0, 6, -9]} scale={[12, 2, 1]} />
-        <Lightformer intensity={6} color="#304FFE" position={[-8, 1, 3]} rotation-y={Math.PI / 2} scale={[10, 3, 1]} />
-        <Lightformer intensity={5} color="#D5FF3F" position={[8, -2, 2]} rotation-y={-Math.PI / 2} scale={[8, 1.5, 1]} />
-        <Lightformer form="ring" intensity={3} color="#ff5fa2" position={[0, -6, 6]} scale={4} />
+        <Lightformer intensity={6} color="#F4F3EF" position={[0, 6, -9]} scale={[12, 2, 1]} />
+        <Lightformer intensity={2.4} color="#304FFE" position={[-8, 1, 3]} rotation-y={Math.PI / 2} scale={[10, 3, 1]} />
+        <Lightformer intensity={1.6} color="#D5FF3F" position={[8, -2, 2]} rotation-y={-Math.PI / 2} scale={[8, 1.5, 1]} />
+        <Lightformer form="ring" intensity={1.2} color="#ff5fa2" position={[0, -6, 6]} scale={4} />
         <Lightformer intensity={2} color="#4FD1C5" position={[0, 0, 10]} scale={[20, 1, 1]} />
       </Environment>
       <Rig />

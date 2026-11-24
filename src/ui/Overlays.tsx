@@ -12,14 +12,17 @@ import Lab from './Lab';
 import Evaluacion from './Evaluacion';
 import { empezar } from './acciones';
 import { relacionesCiudad, USOS_NOMBRE } from '../three/scenes/pilotos/Ciudad';
-import { LogoSVG } from './Chrome';
+import { LogoSVG, Javeriana } from './Chrome';
 
 const idx = (id: EscenaId) => ESCENAS.findIndex((e) => e.id === id);
 
 function Intro() {
   return (
     <div className="ov ov-intro">
-      <motion.p className="mono kicker" {...aparecer(0.6)}>PROPUESTA ACADÉMICA · FACULTAD DE ARQUITECTURA Y DISEÑO · PONTIFICIA UNIVERSIDAD JAVERIANA</motion.p>
+      <motion.div className="intro-cab" {...aparecer(0.6)}>
+        <Javeriana className="jav-intro" />
+        <p className="mono kicker">Propuesta académica para la Facultad de Arquitectura y Diseño<br />Pontificia Universidad Javeriana</p>
+      </motion.div>
       <motion.div className="intro-pie" {...aparecer(1)}>
         <p className="intro-autoras">{AUTORAS.join('  ·  ')}</p>
         <div className="fila">
@@ -63,7 +66,7 @@ function Origen() {
       <motion.div className="chips" {...aparecer(0.9)}>
         {ORIGEN.nodos.map((x) => <button key={x.id} className={'chip ' + (x.id === nodo ? 'on' : rel.includes(x.id) ? 'rel' : '')} onClick={() => set({ nodo: x.id === nodo ? null : x.id })}>{x.nombre}</button>)}
       </motion.div>
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {n ? (
           <motion.div key={n.id} className="tarjeta-nodo" {...aparecer(0)}>
             <h3>{n.nombre}</h3><p>{n.texto}</p>
@@ -181,7 +184,13 @@ function PanelPiloto({ k }: { k: number }) {
                 <button key={id} className={'toggle ' + (st.terr[id] ? 'on' : '')} aria-pressed={st.terr[id]} onClick={() => st.set({ terr: { ...st.terr, [id]: !st.terr[id] } })}><i />{t}</button>
               ))}
             </div>
-            <p className="aviso mono">ESCENARIO ILUSTRATIVO · terreno sintético, sin resultados cuantitativos hasta contar con información validada o un modelo de cálculo documentado.</p>
+            <p className="aviso mono">Relieve y silueta reales de Tierra Bomba (Terrarium + costa OSM, vía la tesis). Las estrategias son ilustrativas: sin resultados cuantitativos hasta contar con un modelo de cálculo documentado.</p>
+            <a className="caso" href="https://alejagoguti-cpu.github.io/tesis_tercer_corte/" target="_blank" rel="noreferrer">
+              <span className="mono">Caso demostrativo · tesis de las autoras</span>
+              <b>Planificación y adaptación territorial frente a la pérdida de suelo costero en Tierra Bomba</b>
+              <small>Alejandra Gómez · Ana Casas · Arquitectura, 2026. Erosión a 10, 20 y 30 años, sintaxis espacial de redes peatonales y de motos, plan maestro en 3D. INVEMAR midió en la isla un retroceso costero promedio de 0,63 m/año y máximo de 3 m/año (1994–2011).</small>
+              <span className="caso-ir mono">Abrir la tesis</span>
+            </a>
           </>
         )}
       </div>
@@ -200,7 +209,7 @@ function Pilotos() {
   const sub = useSt((s) => s.sub);
   return (
     <div className="ov ov-pilotos">
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         {(sub === 0 || sub === 5) && (
           <motion.div key="hub" className="pilotos-hub" {...aparecer(0)}>
             <p className="mono kicker">05 · PROYECTOS PILOTO</p>
@@ -309,7 +318,7 @@ function RutaOv() {
           <li key={i} className={i === paso ? 'on' : i < paso ? 'pasado' : ''}><button onClick={() => set({ rutaPaso: i })}><span className="mono">{String(i + 1).padStart(2, '0')}</span>{x.t}</button></li>
         ))}
       </ol>
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         <motion.div key={paso} className="tarjeta-nodo" {...aparecer(0)}>
           <h3>{r.t}</h3><p>{r.d}</p>
           <p className="mono rel">Recursos: {r.recursos.join(' · ')}</p>
@@ -324,7 +333,7 @@ function RutaOv() {
 function Final() {
   return (
     <div className="ov ov-final">
-      <LogoSVG className="final-logo" />
+      <div className="final-marcas"><LogoSVG className="final-logo" /><span className="marcas-sep" /><Javeriana className="jav-final" /></div>
       <Kinetic as="h1" texto={FINAL.titulo} className="titulo-xl" />
       <motion.p className="sub" {...aparecer(1.2)}>{FINAL.sub}</motion.p>
       <motion.p className="autoras" {...aparecer(1.4)}>{AUTORAS.join(' y ')}</motion.p>
@@ -350,7 +359,7 @@ export default function Overlays() {
   const C = MAPA[id];
   return (
     <div className={'overlays ' + (esMovil ? 'movil' : '')}>
-      <AnimatePresence mode="wait">
+      <AnimatePresence>
         <motion.section key={id} className={'capa-ov ov-' + id} exit={{ opacity: 0, transition: { duration: 0.35 } }}>
           <C />
         </motion.section>

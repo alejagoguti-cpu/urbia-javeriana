@@ -63,6 +63,7 @@ export default function App() {
           <World />
         </Canvas>
       </div>
+      <div className="marco" aria-hidden><i /><i /><i /><i /><span>urbia · Pontificia Universidad Javeriana · Propuesta académica en discusión</span></div>
       <Overlays />
       <Chrome />
       <Cursor />

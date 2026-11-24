@@ -15,6 +15,31 @@ export function LogoSVG({ className = '' }: { className?: string }) {
   );
 }
 
+// El escudo llega en negro sobre blanco; se convierte una sola vez a trazo claro sobre transparente.
+let javerianaURL: Promise<string> | null = null;
+function javerianaClaro() {
+  if (!javerianaURL) javerianaURL = new Promise((res) => {
+    const im = new Image();
+    im.onload = () => {
+      const c = document.createElement('canvas'); c.width = im.naturalWidth; c.height = im.naturalHeight;
+      const x = c.getContext('2d')!; x.drawImage(im, 0, 0);
+      const d = x.getImageData(0, 0, c.width, c.height);
+      for (let i = 0; i < d.data.length; i += 4) {
+        const l = (d.data[i] + d.data[i + 1] + d.data[i + 2]) / 3;
+        d.data[i] = 244; d.data[i + 1] = 243; d.data[i + 2] = 239; d.data[i + 3] = 255 - l;
+      }
+      x.putImageData(d, 0, 0); res(c.toDataURL('image/png'));
+    };
+    im.src = './img/javeriana.png';
+  });
+  return javerianaURL;
+}
+export function Javeriana({ className = '' }: { className?: string }) {
+  const [src, setSrc] = useState<string | null>(null);
+  useEffect(() => { javerianaClaro().then(setSrc); }, []);
+  return src ? <img className={'javeriana ' + className} src={src} alt="Pontificia Universidad Javeriana" draggable={false} /> : <span className={'javeriana ' + className} />;
+}
+
 function Reloj() {
   const inicio = useSt((s) => s.inicioPresentacion);
   const modo = useSt((s) => s.modo);
@@ -39,10 +64,14 @@ export default function Chrome() {
   return (
     <>
       <header className="barra">
-        <button className="marca" onClick={() => irEscena(0)} aria-label="Volver al inicio"><LogoSVG /></button>
+        <div className="marcas">
+          <button className="marca" onClick={() => irEscena(0)} aria-label="Volver al inicio"><LogoSVG /></button>
+          <span className="marcas-sep" />
+          <Javeriana className="jav-barra" />
+        </div>
         <div className="barra-centro mono">
-          <AnimatePresence mode="wait">
-            <motion.span key={e.id} initial={{ y: 12, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -12, opacity: 0 }}>
+          <AnimatePresence>
+            <motion.span key={e.id} style={{ position: "absolute", left: "50%", x: "-50%" }} initial={{ y: 12, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: -12, opacity: 0 }}>
               <b>{e.n}</b> {e.nombre}{e.id === 'pilotos' && st.sub > 0 && st.sub < 5 ? ' · ' + PILOTOS[st.sub - 1].nombre : ''}
             </motion.span>
           </AnimatePresence>
@@ -52,7 +81,7 @@ export default function Chrome() {
           {st.modo && (
             <div className="segmento" role="group" aria-label="Modo">
               <button className={st.modo === 'presentacion' ? 'on' : ''} onClick={() => st.set({ modo: 'presentacion', inicioPresentacion: st.inicioPresentacion || Date.now() })}>Presentación</button>
-              <button className={st.modo === 'exploracion' ? 'on' : ''} onClick={() => st.set({ modo: 'exploracion', menu: true })}>Exploración</button>
+              <button className={st.modo === 'exploracion' ? 'on' : ''} onClick={() => st.set({ modo: 'exploracion' })}>Exploración</button>
             </div>
           )}
           <button className={'icono ' + (st.sonido ? 'on' : '')} aria-pressed={st.sonido} title="Sonido (desactivado por defecto)" onClick={() => { activarSonido(!st.sonido); st.set({ sonido: !st.sonido }); }}>

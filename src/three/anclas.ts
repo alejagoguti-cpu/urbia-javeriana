@@ -54,7 +54,7 @@ function camPiloto(k: number, A: THREE.Vector3): Cam {
     }
     return { p: c.clone().add(V(48, 20, 58)), t: c.clone().add(V(0, 10, 0)), fov: 40 };
   }
-  return { p: c.clone().add(V(-30, 75, 95)), t: c.clone().add(V(0, -2, 0)), fov: 44 };
+  return { p: c.clone().add(V(120, 105, 40)), t: c.clone().add(V(0, -4, 6)), fov: 44 };
 }
 
 /** cámara dentro de cada escena según su progreso local lp (0..1) */

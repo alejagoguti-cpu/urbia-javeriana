@@ -56,6 +56,9 @@ export function posDe(idx: number, sub?: number) {
   return START[idx] + hold * 0.55;
 }
 
+// último destino pedido: permite encadenar flechas aunque la cámara siga viajando
+let destino = { pos: 0, hasta: 0 };
+
 export function irA(pos: number, opts: { guardar?: boolean; inmediato?: boolean } = {}) {
   const st = useSt.getState();
   if (opts.guardar !== false) st.set({ historial: [...st.historial.slice(-20), { pos: S.pos, foco: st.foco }] });
@@ -63,6 +66,7 @@ export function irA(pos: number, opts: { guardar?: boolean; inmediato?: boolean 
   seguirScroll();
   const dist = Math.abs(pos - S.pos);
   const dur = st.reducido || opts.inmediato ? 0 : Math.min(3.2, 0.9 + dist * 0.35);
+  destino = { pos, hasta: performance.now() + dur * 1000 + 150 };
   lenis?.scrollTo(pos * vh(), { duration: dur, immediate: dur === 0, force: true, lock: dur > 0 });
 }
 
@@ -91,7 +95,7 @@ export function paradas() {
 
 export function siguiente(dir: 1 | -1) {
   const p = paradas();
-  const cur = S.pos;
+  const cur = performance.now() < destino.hasta ? destino.pos : S.pos;
   const tgt = dir > 0 ? p.find((x) => x > cur + 0.05) : [...p].reverse().find((x) => x < cur - 0.05);
   if (tgt !== undefined) irA(tgt, { guardar: false });
 }

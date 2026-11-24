@@ -11,6 +11,7 @@ export type ProyectoAutoras = {
 };
 
 export const PROYECTOS_AUTORAS: ProyectoAutoras[] = [
+  { titulo: 'Tesis Tierra Bomba · adaptación frente a la pérdida de suelo costero', url: 'https://alejagoguti-cpu.github.io/tesis_tercer_corte/', nota: 'Alejandra Gómez y Ana Casas, 2026' },
   { titulo: 'Simulador Kennedy', url: 'https://alejagoguti-cpu.github.io/simulador-kennedy/', confirmar: true },
   { titulo: 'Red de problemas Kennedy', url: 'https://alejagoguti-cpu.github.io/red-de-problemas-kennedy/', confirmar: true },
   { titulo: 'Macromodelos Kennedy', url: 'https://alejagoguti-cpu.github.io/macromodelos-kennedy/', confirmar: true },

@@ -1,24 +1,40 @@
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import { useEffect, useMemo, useRef } from 'react';
-import { createNoise2D } from 'simplex-noise';
 import { useSt, smooth, clamp, esMovil } from '../../../store';
 import { presencia } from '../Pilotos';
 
-// Piloto 04 — Territorio insular ILUSTRATIVO (forma alargada inspirada en Tierra Bomba,
-// no es un levantamiento real). Las estrategias transforman el territorio visualmente;
-// no se calculan resultados cuantitativos. Transición: red → curvas de nivel → topografía → paisaje.
-const W = 150, D = 100, HMAX = 9;
+// Piloto 04 — Tierra Bomba con relieve y silueta REALES, tomados de la tesis de las autoras
+// (tesis_tercer_corte: teselas Terrarium z12 y línea de costa de OpenStreetMap; ver tools/tierrabomba.mjs).
+// El relieve Terrarium tiene varios metros de error vertical y se exagera para leerlo.
+// Las estrategias son ILUSTRATIVAS: transforman el territorio visualmente, sin resultados cuantitativos.
+// Transición: red → curvas de nivel → topografía → paisaje.
+export const W = 84, D = 150; // unidades de escena (≈6,8 km × 12,1 km)
+const HMAX = 7;
 function alea(seed: number) { let s = seed; return () => { s = (s * 16807) % 2147483647; return s / 2147483647; }; }
-const noise = createNoise2D(alea(7));
 
+type TBData = { w: number; h: number; m: number; maxH: number; alt: Int16Array; mas: Uint8Array };
+let TB: TBData | null = null;
+let promesa: Promise<void> | null = null;
+function useTB() {
+  if (TB) return TB;
+  if (!promesa) promesa = fetch('./datos/tierrabomba.bin').then((r) => r.arrayBuffer()).then((buf) => {
+    const head = new Float32Array(buf, 0, 4); const w = head[0], h = head[1];
+    const alt = new Int16Array(buf, 16, w * h); const mas = new Uint8Array(buf, 16 + w * h * 2, w * h);
+    TB = { w, h, m: head[2], maxH: head[3], alt, mas };
+  });
+  throw promesa;
+}
+
+/** altura en unidades de escena (exagerada) en (x, z); negativa en el mar */
 export function altura(x: number, z: number) {
-  // isla alargada en diagonal
-  const a = -0.45; const xr = x * Math.cos(a) - z * Math.sin(a); const zr = x * Math.sin(a) + z * Math.cos(a);
-  const m = 1 - Math.pow(xr / 64, 2) - Math.pow(zr / 26, 2);
-  const n = noise(x * 0.03, z * 0.03) * 0.5 + noise(x * 0.08, z * 0.08) * 0.22 + noise(x * 0.2, z * 0.2) * 0.06;
-  const h = m + n * 0.55;
-  return h > 0 ? Math.pow(h, 1.3) * HMAX : h * 4;
+  if (!TB) return -1;
+  const u = (x / W + 0.5) * TB.w - 0.5, v = (z / D + 0.5) * TB.h - 0.5;
+  const i = Math.max(0, Math.min(TB.w - 2, Math.floor(u))), j = Math.max(0, Math.min(TB.h - 2, Math.floor(v)));
+  const fx = Math.max(0, Math.min(1, u - i)), fy = Math.max(0, Math.min(1, v - j));
+  const g = (a: number, b: number) => TB!.alt[b * TB!.w + a] / 10;
+  const m = (g(i, j) * (1 - fx) + g(i + 1, j) * fx) * (1 - fy) + (g(i, j + 1) * (1 - fx) + g(i + 1, j + 1) * fx) * fy;
+  return m >= 0 ? (m / TB.maxH) * HMAX : Math.max(-4, m * 0.25);
 }
 
 const vert = /* glsl */ `
@@ -45,17 +61,20 @@ void main(){
   float curva = (1.0 - min(cv, 1.0)) * step(0.0, vH);
   // etapa 3: paisaje
   vec3 arena = vec3(0.78,0.72,0.58), verde = vec3(0.22,0.36,0.2), seco = vec3(0.46,0.45,0.32), fondo = vec3(0.05,0.12,0.18);
-  vec3 paisaje = vH < 0.0 ? mix(fondo, vec3(0.1,0.3,0.35), clamp(1.0+vH*0.3,0.0,1.0)) : vH < 0.6 ? arena : mix(verde, seco, smoothstep(4.0, 9.0, vH));
+  vec3 paisaje = vH < 0.0 ? mix(fondo, vec3(0.1,0.3,0.35), clamp(1.0+vH*0.3,0.0,1.0)) : vH < 0.3 ? arena : mix(verde, seco, smoothstep(3.0, 7.0, vH));
   paisaje *= l;
   // condiciones ambientales (ilustrativo): calor en zonas bajas expuestas
-  float calor = uClima * smoothstep(3.5, 0.3, vH) * step(0.0, vH);
+  float calor = uClima * smoothstep(2.0, 0.2, vH) * step(0.0, vH);
   paisaje = mix(paisaje, vec3(1.0,0.36,0.2), calor*0.55);
   float s1 = smoothstep(0.0, 0.35, uU), s2 = smoothstep(0.35, 0.7, uU), s3 = smoothstep(0.65, 1.0, uU);
   vec3 c = vec3(0.04);
   c = mix(c, vec3(0.19,0.31,1.0)*1.4, red * s1 * (1.0 - s2*0.8));
   c = mix(c, vec3(0.84,1.0,0.25), curva * s2 * (1.0 - s3*0.65));
   c = mix(c, paisaje, s3 * (1.0 - curva*0.3));
-  gl_FragColor = vec4(c, 1.0);
+  // en el paisaje el mar lo dibuja el plano de agua: el terreno sumergido se desvanece
+  float a = vH < 0.0 ? 1.0 - s3 : 1.0;
+  if (a < 0.02) discard;
+  gl_FragColor = vec4(c, a);
 }`;
 
 function dispersar(n: number, cond: (x: number, z: number, h: number) => boolean, seed: number) {
@@ -75,9 +94,10 @@ function Instancias({ pts, geo, color, s = 1 }: { pts: THREE.Vector3[]; geo: THR
   };
 
 export default function Territorio() {
+  useTB();
   const est = useSt((s) => s.terr);
   const geo = useMemo(() => {
-    const seg = esMovil ? 120 : 200;
+    const seg = esMovil ? 110 : 170;
     const g = new THREE.PlaneGeometry(W, D, seg, Math.round(seg * D / W)); g.rotateX(-Math.PI / 2);
     const p = g.attributes.position as THREE.BufferAttribute; const h = new Float32Array(p.count);
     for (let i = 0; i < p.count; i++) h[i] = altura(p.getX(i), p.getZ(i));
@@ -87,18 +107,18 @@ export default function Territorio() {
   const uni = useMemo(() => ({ uU: { value: 0 }, uClima: { value: 0 }, uT: { value: 0 }, uAgua: { value: 0 } }), []);
   const pueblos = useMemo(() => [new THREE.Vector3(-42, 0, 22), new THREE.Vector3(6, 0, -2), new THREE.Vector3(44, 0, -24)].map((p) => p.setY(Math.max(0.3, altura(p.x, p.z)))), []);
   const capas = useMemo(() => {
-    const manglar = dispersar(esMovil ? 300 : 700, (_x, _z, h) => h > -0.4 && h < 0.5, 3);
+    const manglar = dispersar(esMovil ? 300 : 700, (_x, _z, h) => h > 0.02 && h < 0.45, 3);
     const bosque = dispersar(esMovil ? 250 : 600, (_x, _z, h) => h > 1.5 && h < 7, 5);
     const reforest = dispersar(esMovil ? 300 : 700, (_x, _z, h) => h > 0.6 && h < 3.5, 9);
     const solar = dispersar(90, (x, z, h) => h > 0.8 && h < 3 && pueblos.some((p) => Math.hypot(p.x - x, p.z - z) < 16), 11);
     const agua = pueblos.map((p, i) => new THREE.Vector3(p.x + 7, Math.max(0.3, altura(p.x + 7, p.z - 5)), p.z - 5 + i));
-    const casas = pueblos.flatMap((p, k) => dispersar(18, (x, z, h) => h > 0.2 && Math.hypot(p.x - x, p.z - z) < 9, 20 + k));
+    const casas = pueblos.flatMap((p, k) => dispersar(22, (x, z, h) => h > 0.2 && h < 3 && Math.hypot(p.x - x, p.z - z) < 7, 20 + k));
     return { manglar, bosque, reforest, solar, agua, casas };
   }, [pueblos]);
   const caminos = useMemo(() => {
     const curvas = [[0, 1], [1, 2]].map(([a, b]) => {
       const pts: THREE.Vector3[] = [];
-      for (let i = 0; i <= 30; i++) { const p = pueblos[a].clone().lerp(pueblos[b], i / 30); p.z += Math.sin((i / 30) * Math.PI) * 6; p.y = Math.max(0.3, altura(p.x, p.z)) + 0.4; pts.push(p); }
+      for (let i = 0; i <= 30; i++) { const p = pueblos[a].clone().lerp(pueblos[b], i / 30); p.x += Math.sin((i / 30) * Math.PI) * 4; p.y = Math.max(0.3, altura(p.x, p.z)) + 0.4; pts.push(p); }
       return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 80, 0.45, 6, false);
     });
     return curvas;
@@ -134,10 +154,10 @@ export default function Territorio() {
   return (
     <group>
       <mesh geometry={geo} frustumCulled={false}>
-        <shaderMaterial vertexShader={vert} fragmentShader={frag} uniforms={uni} extensions={{ derivatives: true } as any} />
+        <shaderMaterial vertexShader={vert} fragmentShader={frag} uniforms={uni} transparent extensions={{ derivatives: true } as any} />
       </mesh>
       <mesh ref={mar} rotation-x={-Math.PI / 2}>
-        <circleGeometry args={[W * 0.62, 96]} />
+        <circleGeometry args={[D * 0.62, 96]} />
         <meshPhysicalMaterial color="#1c5f6e" transparent opacity={0} roughness={0.08} metalness={0.2} clearcoat={1} />
       </mesh>
       <group ref={g.base}>

@@ -121,7 +121,7 @@ export default function Patrimonio() {
       </lineSegments>
       <mesh ref={plano} rotation-x={-Math.PI / 2}>
         <planeGeometry args={[70, 60]} />
-        <meshBasicMaterial color="#D5FF3F" transparent opacity={0.025} side={THREE.DoubleSide} depthWrite={false} />
+        <meshBasicMaterial color="#D5FF3F" transparent opacity={0.012} side={THREE.DoubleSide} depthWrite={false} />
       </mesh>
       <mesh rotation-x={-Math.PI / 2} position={[8, -0.05, 0]}><circleGeometry args={[55, 64]} /><meshStandardMaterial color="#121318" /></mesh>
     </group>

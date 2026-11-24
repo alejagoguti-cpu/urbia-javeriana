@@ -45,7 +45,7 @@ export function logoGeometria(prof = 34) {
 
 export function materialIridiscente(color = '#c9ccd6') {
   return new THREE.MeshPhysicalMaterial({
-    color, metalness: 1, roughness: 0.12, iridescence: 1, iridescenceIOR: 1.7, iridescenceThicknessRange: [200, 900],
+    color, metalness: 1, roughness: 0.18, iridescence: 0.55, iridescenceIOR: 1.4, iridescenceThicknessRange: [180, 520],
     clearcoat: 1, clearcoatRoughness: 0.05, envMapIntensity: 1.6,
   });
 }

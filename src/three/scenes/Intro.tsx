@@ -19,7 +19,7 @@ export default function Intro() {
       const t = (i / 60) * Math.PI * 2;
       pts.push(new THREE.Vector3(Math.sin(t) * 19, Math.sin(2 * t) * 9 - 13, Math.cos(t) * 7 - 4));
     }
-    return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts, true), 240, 0.22, 12, true);
+    return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts, true), 240, 0.1, 10, true);
   }, []);
   const ap = useRef(0);
   useFrame((_, dt) => {
@@ -51,7 +51,7 @@ export default function Intro() {
         <mesh geometry={esquina} material={matEsq} />
       </group>
       <mesh ref={anillo} position={[0, 0, -4]}>
-        <torusGeometry args={[17, 0.55, 32, 200]} />
+        <torusGeometry args={[17, 0.22, 24, 240]} />
         <primitive object={mat} attach="material" />
       </mesh>
       <mesh geometry={tubo}>

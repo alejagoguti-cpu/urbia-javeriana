@@ -63,9 +63,9 @@ function Grua({ alto }: { alto: number }) {
   });
   return (
     <group position={[-24, 0, -8]}>
-      <mesh position={[0, 30, 0]}><boxGeometry args={[0.6, 60, 0.6]} /><meshBasicMaterial color="#D5FF3F" wireframe /></mesh>
+      <mesh position={[0, 30, 0]}><boxGeometry args={[0.4, 60, 0.4]} /><meshBasicMaterial color="#5a606b" wireframe /></mesh>
       <group ref={g}>
-        <mesh position={[14, 0, 0]}><boxGeometry args={[34, 0.5, 0.5]} /><meshBasicMaterial color="#D5FF3F" /></mesh>
+        <mesh position={[14, 0, 0]}><boxGeometry args={[34, 0.3, 0.3]} /><meshBasicMaterial color="#8C929C" /></mesh>
         <mesh position={[24, -6, 0]}><boxGeometry args={[0.08, 12, 0.08]} /><meshBasicMaterial color="#F4F3EF" /></mesh>
       </group>
     </group>

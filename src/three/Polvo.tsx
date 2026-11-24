@@ -21,9 +21,9 @@ void main(){
   mv.xy += vec2(-d.y, d.x) * f * 6.0;
   gl_Position = projectionMatrix * mv;
   float dist = -mv.z;
-  float size = (0.6 + aRnd.w*2.6) * (1.0 + abs(uVel)*0.6);
+  float size = (0.35 + aRnd.w*1.5) * (1.0 + abs(uVel)*0.5);
   gl_PointSize = size * uPx * (300.0 / dist);
-  vA = smoothstep(220.0, 30.0, dist) * smoothstep(1.0, 8.0, dist) * (0.35 + aRnd.w*0.65);
+  vA = smoothstep(200.0, 30.0, dist) * smoothstep(2.0, 12.0, dist) * (0.18 + aRnd.w*0.45);
   // azul a la izquierda, oro/lima a la derecha como en un campo de profundidad
   float side = smoothstep(-0.6, 0.6, ndc.x + (aRnd.x-0.5)*0.8);
   vC = mix(vec3(0.25,0.42,1.0), vec3(0.95,0.92,0.55), side);
@@ -39,7 +39,7 @@ void main(){
 }`;
 
 export default function Polvo() {
-  const n = esMovil ? 1800 : 5200;
+  const n = esMovil ? 1500 : 4200;
   const { camera, gl } = useThree();
   const geo = useMemo(() => {
     const g = new THREE.BufferGeometry();
