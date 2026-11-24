@@ -1,0 +1,68 @@
+{
+  "_nota": "Archivo de configuración editable. Fechas, duración y sesiones son una PROPUESTA sin aprobación institucional. Modifique libremente y recargue la página.",
+  "inicio": "2027-02-01",
+  "semanas": 6,
+  "horasPorSesion": 3,
+  "plantilla": [
+    {
+      "n": 1,
+      "titulo": "Diagnóstico y coordinación docente",
+      "objetivo": "Identificar con el profesor responsable una necesidad concreta del proyecto donde una herramienta tecnológica aporte valor.",
+      "actividades": ["Reunión de coordinación con el profesor", "Revisión del enunciado y cronograma del taller", "Diagnóstico de conocimientos previos del grupo"],
+      "herramientas": ["Formulario de diagnóstico", "Matriz necesidad–tecnología"],
+      "entregable": "Acta de coordinación y matriz de necesidades",
+      "relacion": "Define qué parte del proyecto académico se apoyará con la herramienta."
+    },
+    {
+      "n": 2,
+      "titulo": "Introducción tecnológica",
+      "objetivo": "Presentar los fundamentos de la tecnología seleccionada a partir de ejemplos arquitectónicos.",
+      "actividades": ["Sesión introductoria con casos", "Instalación y configuración del entorno", "Ejercicio corto de familiarización"],
+      "herramientas": ["Según el piloto (ver lista de herramientas)"],
+      "entregable": "Ejercicio de familiarización resuelto",
+      "relacion": "Nivela al grupo antes del ejercicio aplicado."
+    },
+    {
+      "n": 3,
+      "titulo": "Workshop práctico guiado",
+      "objetivo": "Resolver paso a paso un ejercicio guiado que reproduce un problema del proyecto.",
+      "actividades": ["Taller guiado en sala", "Trabajo por equipos", "Asesoría en sitio"],
+      "herramientas": ["Según el piloto"],
+      "entregable": "Ejercicio guiado documentado",
+      "relacion": "Traduce la herramienta a un problema del taller de proyectos."
+    },
+    {
+      "n": 4,
+      "titulo": "Desarrollo del prototipo",
+      "objetivo": "Construir un prototipo propio adaptado al proyecto de cada equipo.",
+      "actividades": ["Desarrollo autónomo", "Asesorías de seguimiento", "Revisión intermedia"],
+      "herramientas": ["Según el piloto", "Repositorio compartido"],
+      "entregable": "Prototipo funcional en versión preliminar",
+      "relacion": "El prototipo se convierte en insumo del proyecto."
+    },
+    {
+      "n": 5,
+      "titulo": "Aplicación al proyecto arquitectónico",
+      "objetivo": "Integrar los resultados del prototipo en las decisiones y la representación del proyecto.",
+      "actividades": ["Aplicación al proyecto", "Ajustes con el profesor", "Preparación de la socialización"],
+      "herramientas": ["Prototipo desarrollado"],
+      "entregable": "Proyecto con la herramienta aplicada",
+      "relacion": "Momento en que la tecnología influye en el proyecto."
+    },
+    {
+      "n": 6,
+      "titulo": "Socialización y evaluación",
+      "objetivo": "Presentar resultados y evaluar el piloto con estudiantes y profesores.",
+      "actividades": ["Socialización de prototipos", "Encuesta a estudiantes", "Entrevista al profesor", "Documentación final"],
+      "herramientas": ["Instrumentos de evaluación del piloto"],
+      "entregable": "Informe de evaluación y repositorio documentado",
+      "relacion": "Cierra el ciclo y alimenta la decisión de continuidad."
+    }
+  ],
+  "pilotos": {
+    "habitat": { "sesionesPorSemana": [1, 2, 2, 2, 1, 1], "duracionHoras": [2, 3, 3, 3, 3, 2], "herramientas": ["Python / Grasshopper", "Simulación de iluminación", "Prototipos web"] },
+    "urbanos": { "sesionesPorSemana": [1, 2, 2, 2, 1, 1], "duracionHoras": [2, 3, 3, 3, 3, 2], "herramientas": ["QGIS", "Python (redes)", "Mapas web"] },
+    "patrimonio": { "sesionesPorSemana": [1, 1, 2, 2, 2, 1], "duracionHoras": [2, 3, 3, 3, 3, 2], "herramientas": ["Fotogrametría", "Nubes de puntos", "Visores 3D web"] },
+    "territorios": { "sesionesPorSemana": [1, 2, 2, 2, 1, 1], "duracionHoras": [2, 3, 3, 3, 3, 2], "herramientas": ["Modelos de simulación", "Cartografía socioecológica", "Interfaces web"] }
+  }
+}
