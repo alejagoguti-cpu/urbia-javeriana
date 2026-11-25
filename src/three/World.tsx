@@ -89,17 +89,17 @@ export default function World() {
   const reducido = useSt((s) => s.reducido);
   return (
     <>
-      <color attach="background" args={['#08090C']} />
-      <fogExp2 attach="fog" args={['#08090C', 0.0042]} />
+      <color attach="background" args={['#0E0F0D']} />
+      <fogExp2 attach="fog" args={['#0E0F0D', 0.0042]} />
       <ambientLight intensity={0.25} />
-      <directionalLight position={[60, 120, 40]} intensity={1.4} color="#f4f3ef" />
-      <directionalLight position={[-80, 30, -60]} intensity={0.6} color="#304FFE" />
+      <directionalLight position={[60, 120, 40]} intensity={1.4} color="#F5F3EB" />
+      <directionalLight position={[-80, 30, -60]} intensity={0.6} color="#A99BCB" />
       <Environment resolution={256} frames={1}>
-        <Lightformer intensity={6} color="#F4F3EF" position={[0, 6, -9]} scale={[12, 2, 1]} />
-        <Lightformer intensity={2.4} color="#304FFE" position={[-8, 1, 3]} rotation-y={Math.PI / 2} scale={[10, 3, 1]} />
-        <Lightformer intensity={1.6} color="#D5FF3F" position={[8, -2, 2]} rotation-y={-Math.PI / 2} scale={[8, 1.5, 1]} />
-        <Lightformer form="ring" intensity={1.2} color="#ff5fa2" position={[0, -6, 6]} scale={4} />
-        <Lightformer intensity={2} color="#4FD1C5" position={[0, 0, 10]} scale={[20, 1, 1]} />
+        <Lightformer intensity={6} color="#F5F3EB" position={[0, 6, -9]} scale={[12, 2, 1]} />
+        <Lightformer intensity={2.4} color="#A99BCB" position={[-8, 1, 3]} rotation-y={Math.PI / 2} scale={[10, 3, 1]} />
+        <Lightformer intensity={1.6} color="#C7FF27" position={[8, -2, 2]} rotation-y={-Math.PI / 2} scale={[8, 1.5, 1]} />
+        <Lightformer form="ring" intensity={1.2} color="#E36C4B" position={[0, -6, 6]} scale={4} />
+        <Lightformer intensity={2.2} color="#F5F3EB" position={[0, 0, 10]} scale={[20, 1, 1]} />
       </Environment>
       <Rig />
       <Polvo />

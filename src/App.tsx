@@ -8,6 +8,7 @@ import Chrome, { LogoSVG } from './ui/Chrome';
 import Overlays from './ui/Overlays';
 import { S, esMovil, useSt } from './store';
 import { iniciarScroll, teclado } from './lib/nav';
+import { iniciarAjuste } from './ui/ajuste';
 
 function Cursor() {
   const a = useRef<HTMLDivElement>(null!);
@@ -46,7 +47,7 @@ function Cargador() {
 
 export default function App() {
   const [dpr, setDpr] = useState(esMovil ? 1.25 : 1.5);
-  useEffect(() => { iniciarScroll(); teclado(); }, []);
+  useEffect(() => { iniciarScroll(); teclado(); iniciarAjuste(); }, []);
   return (
     <>
       <div id="scroll-alto" />
@@ -63,6 +64,7 @@ export default function App() {
           <World />
         </Canvas>
       </div>
+      <div className="tech-grid" aria-hidden /><div className="tech-scan" aria-hidden />
       <div className="marco" aria-hidden><i /><i /><i /><i /><span>urbia · Pontificia Universidad Javeriana · Propuesta académica en discusión</span></div>
       <Overlays />
       <Chrome />

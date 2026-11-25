@@ -90,7 +90,7 @@ export default function Red() {
         <lineBasicMaterial vertexColors transparent opacity={0.9} />
       </lineSegments>
       <points geometry={viaj.g} frustumCulled={false}>
-        <pointsMaterial color="#D5FF3F" size={0.5} sizeAttenuation transparent opacity={0.9} depthWrite={false} />
+        <pointsMaterial color="#C7FF27" size={0.5} sizeAttenuation transparent opacity={0.9} depthWrite={false} />
       </points>
       {N.map((n, i) => {
         const sel = nodo === n.id;
@@ -102,13 +102,13 @@ export default function Red() {
               onPointerOut={() => (document.body.dataset.cursor = '')}
             >
               <icosahedronGeometry args={[1.5, 3]} />
-              <meshPhysicalMaterial color={sel ? '#D5FF3F' : '#F4F3EF'} emissive={sel ? '#D5FF3F' : '#304FFE'} emissiveIntensity={sel ? 0.8 : 0.25} metalness={0.7} roughness={0.15} iridescence={1} clearcoat={1} />
+              <meshPhysicalMaterial color={sel ? '#C7FF27' : '#F5F3EB'} emissive={sel ? '#C7FF27' : '#A99BCB'} emissiveIntensity={sel ? 0.8 : 0.25} metalness={0.7} roughness={0.15} iridescence={1} clearcoat={1} />
             </mesh>
             <mesh scale={2.6}>
               <icosahedronGeometry args={[1, 1]} />
-              <meshBasicMaterial color={sel ? '#D5FF3F' : '#8C929C'} wireframe transparent opacity={0.18} />
+              <meshBasicMaterial color={sel ? '#C7FF27' : '#898D84'} wireframe transparent opacity={0.18} />
             </mesh>
-            <Text font={FUENTE} fontSize={1.15} position={[0, -3.2, 0]} color="#F4F3EF" anchorX="center" anchorY="top" maxWidth={12} textAlign="center">
+            <Text font={FUENTE} fontSize={1.15} position={[0, -3.2, 0]} color="#F5F3EB" anchorX="center" anchorY="top" maxWidth={12} textAlign="center">
               {n.nombre}
             </Text>
           </group>

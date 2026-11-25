@@ -1,3 +1,4 @@
+import IconoCromo from './IconoCromo';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { ESCENAS, HERO, ORIGEN, OPORTUNIDAD, METODO, PILOTOS, RUTA, FINAL, AUTORAS, AVISO, type EscenaId } from '../data/contenido';
@@ -26,8 +27,8 @@ function Intro() {
       <motion.div className="intro-pie" {...aparecer(1)}>
         <p className="intro-autoras">{AUTORAS.join('  ·  ')}</p>
         <div className="fila">
-          <button className="btn" onClick={() => empezar('presentacion')}>Iniciar presentación <span className="mono">15 min</span></button>
-          <button className="btn-sec" onClick={() => empezar('exploracion')}>Explorar libremente</button>
+          <button className="btn" onClick={() => empezar('presentacion')}><IconoCromo n="play" />Iniciar presentación <span className="mono">15 min</span></button>
+          <button className="btn-sec" onClick={() => empezar('exploracion')}><IconoCromo n="orbita" />Explorar libremente</button>
         </div>
         <p className="mono pista">Haga clic en el logo o desplácese para comenzar</p>
       </motion.div>
@@ -42,7 +43,7 @@ function Hero() {
       <div className="hero-txt">
         <Kinetic as="h1" texto={HERO.titulo} className="titulo-xl" />
         <motion.p className="sub" {...aparecer(0.9)}>{HERO.sub}</motion.p>
-        <motion.button className="btn" {...aparecer(1.1)} onClick={() => irEscena(idx('origen'))}>{HERO.boton}</motion.button>
+        <motion.button className="btn" {...aparecer(1.1)} onClick={() => irEscena(idx('origen'))}>{HERO.boton}<IconoCromo n="der" /></motion.button>
       </div>
       <div className="etapas mono">
         {HERO.etapas.map((e, i) => (
@@ -74,7 +75,7 @@ function Origen() {
           </motion.div>
         ) : <motion.p key="p" className="mono pista" {...aparecer(1.1)}>Seleccione un nodo de la red: los demás se reorganizan según sus relaciones.</motion.p>}
       </AnimatePresence>
-      <motion.div className="slots" {...aparecer(1.2)}>
+      {!n && <motion.div className="slots" {...aparecer(1.2)}>
         <p className="mono kicker">PROYECTOS DE LAS AUTORAS</p>
         <div className="slots-fila">
           {PROYECTOS_AUTORAS.slice(0, 4).map((p, i) => (
@@ -83,7 +84,7 @@ function Origen() {
             </a>
           ))}
         </div>
-      </motion.div>
+      </motion.div>}
     </div>
   );
 }
@@ -124,7 +125,7 @@ function Metodo() {
             <div className="fila">
               <button className="btn-sec" disabled={capa === 0} onClick={() => abrirFoco('capa', capa! - 1, { capa: capa! - 1 })}>Anterior</button>
               <button className="btn-sec" disabled={capa === 4} onClick={() => abrirFoco('capa', capa! + 1, { capa: capa! + 1 })}>Siguiente</button>
-              <button className="btn" onClick={cerrarFoco}>Cerrar</button>
+              <button className="btn" onClick={cerrarFoco}><IconoCromo n="cerrar" />Cerrar</button>
             </div>
           </motion.div>
         )}
@@ -184,12 +185,12 @@ function PanelPiloto({ k }: { k: number }) {
                 <button key={id} className={'toggle ' + (st.terr[id] ? 'on' : '')} aria-pressed={st.terr[id]} onClick={() => st.set({ terr: { ...st.terr, [id]: !st.terr[id] } })}><i />{t}</button>
               ))}
             </div>
-            <p className="aviso mono">Relieve y silueta reales de Tierra Bomba (Terrarium + costa OSM, vía la tesis). Las estrategias son ilustrativas: sin resultados cuantitativos hasta contar con un modelo de cálculo documentado.</p>
+            <p className="aviso mono">Relieve y costa reales de Tierra Bomba (datos de la tesis). Estrategias ilustrativas, sin resultados cuantitativos.</p>
             <a className="caso" href="https://alejagoguti-cpu.github.io/tesis_tercer_corte/" target="_blank" rel="noreferrer">
               <span className="mono">Caso demostrativo · tesis de las autoras</span>
               <b>Planificación y adaptación territorial frente a la pérdida de suelo costero en Tierra Bomba</b>
-              <small>Alejandra Gómez · Ana Casas · Arquitectura, 2026. Erosión a 10, 20 y 30 años, sintaxis espacial de redes peatonales y de motos, plan maestro en 3D. INVEMAR midió en la isla un retroceso costero promedio de 0,63 m/año y máximo de 3 m/año (1994–2011).</small>
-              <span className="caso-ir mono">Abrir la tesis</span>
+              <small>Alejandra Gómez · Ana Casas, 2026. Erosión a 10, 20 y 30 años, sintaxis espacial y plan maestro 3D. INVEMAR midió un retroceso costero promedio de 0,63 m/año (máx. 3 m/año, 1994–2011).</small>
+              <span className="caso-ir mono">Abrir la tesis <IconoCromo n="diag" lima /></span>
             </a>
           </>
         )}
@@ -260,7 +261,7 @@ function Cronograma() {
           ))}
         </div>
         <div className="fila">
-          <button className="btn" onClick={() => pdfCronograma(c, st.comparar ? 'todos' : st.pilotoCrono)}>Descargar PDF</button>
+          <button className="btn" onClick={() => pdfCronograma(c, st.comparar ? 'todos' : st.pilotoCrono)}><IconoCromo n="bajar" />Descargar PDF</button>
         </div>
       </div>
       <AnimatePresence>
@@ -277,7 +278,7 @@ function Cronograma() {
               <dt>Entregable</dt><dd>{s.entregable}</dd>
               <dt>Relación con el proyecto</dt><dd>{s.relacion}</dd>
             </dl>
-            <button className="btn" onClick={cerrarFoco}>Cerrar</button>
+            <button className="btn" onClick={cerrarFoco}><IconoCromo n="cerrar" />Cerrar</button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -338,10 +339,10 @@ function Final() {
       <motion.p className="sub" {...aparecer(1.2)}>{FINAL.sub}</motion.p>
       <motion.p className="autoras" {...aparecer(1.4)}>{AUTORAS.join(' y ')}</motion.p>
       <motion.div className="fila final-btns" {...aparecer(1.6)}>
-        <button className="btn" onClick={pdfPropuesta}>Descargar propuesta académica</button>
-        <button className="btn-sec" onClick={() => irEscena(idx('pilotos'), 0)}>Explorar proyectos piloto</button>
-        <button className="btn-sec" onClick={() => irEscena(idx('cronograma'))}>Consultar cronograma</button>
-        <button className="btn-sec" onClick={() => irEscena(0)}>Volver al inicio</button>
+        <button className="btn" onClick={pdfPropuesta}><IconoCromo n="bajar" />Descargar propuesta académica</button>
+        <button className="btn-sec" onClick={() => irEscena(idx('pilotos'), 0)}><IconoCromo n="orbita" />Explorar proyectos piloto</button>
+        <button className="btn-sec" onClick={() => irEscena(idx('cronograma'))}><IconoCromo n="esquina" lima />Consultar cronograma</button>
+        <button className="btn-sec" onClick={() => irEscena(0)}><IconoCromo n="inicio" />Volver al inicio</button>
       </motion.div>
       <p className="mono aviso">{AVISO}</p>
     </div>
@@ -357,10 +358,15 @@ export default function Overlays() {
   const escena = useSt((s) => s.escena);
   const id = ESCENAS[escena].id;
   const C = MAPA[id];
+  // seguro: si una salida animada queda interrumpida, la capa anterior se oculta igual
+  useEffect(() => {
+    const t = setTimeout(() => document.querySelectorAll<HTMLElement>('.capa-ov').forEach((el) => { if (el.dataset.id !== id) el.style.display = 'none'; }), 700);
+    return () => clearTimeout(t);
+  }, [id]);
   return (
     <div className={'overlays ' + (esMovil ? 'movil' : '')}>
       <AnimatePresence>
-        <motion.section key={id} className={'capa-ov ov-' + id} exit={{ opacity: 0, transition: { duration: 0.35 } }}>
+        <motion.section key={id} data-id={id} className={'capa-ov ov-' + id} exit={{ opacity: 0, transition: { duration: 0.35 } }}>
           <C />
         </motion.section>
       </AnimatePresence>

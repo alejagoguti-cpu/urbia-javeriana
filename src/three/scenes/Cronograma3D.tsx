@@ -21,7 +21,7 @@ export default function Cronograma3D() {
     <group>
       <gridHelper args={[140, 28, '#262a33', '#14161b']} />
       {Array.from({ length: c.semanas }).map((_, k) => (
-        <Text key={k} font={MONO} fontSize={1.6} color={semana === k ? '#D5FF3F' : '#8C929C'} position={[(k - (c.semanas - 1) / 2) * 16, 0.1, 22]} rotation-x={-Math.PI / 2} anchorX="center">
+        <Text key={k} font={MONO} fontSize={1.6} color={semana === k ? '#C7FF27' : '#898D84'} position={[(k - (c.semanas - 1) / 2) * 16, 0.1, 22]} rotation-x={-Math.PI / 2} anchorX="center">
           {'SEMANA ' + String(k + 1).padStart(2, '0')}
         </Text>
       ))}

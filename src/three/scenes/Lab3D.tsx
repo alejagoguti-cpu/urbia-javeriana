@@ -47,15 +47,15 @@ export default function Lab3D() {
       >
         <instancedMesh ref={inst} args={[undefined, undefined, MAX]} frustumCulled={false}>
           <boxGeometry args={[1, 1, 1]} />
-          <meshPhysicalMaterial color="#F4F3EF" roughness={0.3} clearcoat={1} />
+          <meshPhysicalMaterial color="#F5F3EB" roughness={0.3} clearcoat={1} />
         </instancedMesh>
         <instancedMesh ref={bordes} args={[undefined, undefined, MAX]} frustumCulled={false}>
           <boxGeometry args={[1, 1, 1]} />
-          <meshPhysicalMaterial color="#304FFE" transparent opacity={0.22} roughness={0.05} metalness={0.2} depthWrite={false} />
+          <meshPhysicalMaterial color="#A99BCB" transparent opacity={0.22} roughness={0.05} metalness={0.2} depthWrite={false} />
         </instancedMesh>
         <mesh position={[0, 40, 0]} visible={false}><boxGeometry args={[22, 80, 22]} /></mesh>
       </group>
-      <mesh rotation-x={-Math.PI / 2}><ringGeometry args={[12, 12.3, 96]} /><meshBasicMaterial color="#D5FF3F" /></mesh>
+      <mesh rotation-x={-Math.PI / 2}><ringGeometry args={[12, 12.3, 96]} /><meshBasicMaterial color="#C7FF27" /></mesh>
       <gridHelper args={[80, 20, '#262a33', '#14161b']} />
     </group>
   );

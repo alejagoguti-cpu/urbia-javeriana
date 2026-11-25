@@ -139,7 +139,7 @@ export default function Hero() {
         {Array.from({ length: 6 }).map((_, i) => (
           <mesh key={i} rotation-x={-Math.PI / 2} scale={[1 - i * 0.035, 1, 1]}>
             <planeGeometry args={[48, 30]} />
-            <meshPhysicalMaterial color="#304FFE" transparent opacity={0} side={THREE.DoubleSide} depthWrite={false} roughness={0.2} metalness={0.1} />
+            <meshPhysicalMaterial color="#A99BCB" transparent opacity={0} side={THREE.DoubleSide} depthWrite={false} roughness={0.2} metalness={0.1} />
           </mesh>
         ))}
       </group>

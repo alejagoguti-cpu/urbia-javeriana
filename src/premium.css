@@ -1,7 +1,7 @@
 /* =====================================================================
    CAPA PREMIUM — editorial, líneas finas, menos brillo, más precisión
    ===================================================================== */
-:root { --linea: rgba(244, 243, 239, .1); --linea-f: rgba(244, 243, 239, .22); --vidrio: rgba(10, 11, 15, .55); }
+:root { --linea: rgba(245, 243, 235, .1); --linea-f: rgba(245, 243, 235, .22); --vidrio: rgba(10, 11, 15, .55); }
 body { font-feature-settings: 'ss01', 'tnum'; }
 .mono { font-size: 10px; letter-spacing: .14em; }
 
@@ -35,7 +35,7 @@ body { font-feature-settings: 'ss01', 'tnum'; }
 .kicker { display: flex; align-items: center; gap: 12px; color: var(--blanco); opacity: .9; }
 .kicker::before { content: ''; width: 28px; height: 1px; background: var(--lima); flex: none; }
 .intro-cab .kicker::before { display: none; }
-.cuerpo { font-weight: 300; color: rgba(244, 243, 239, .72); font-size: 15.5px; }
+.cuerpo { font-weight: 300; color: rgba(245, 243, 235, .72); font-size: 15.5px; }
 .sub { font-weight: 300; }
 
 /* botones: rectos, precisos */
@@ -54,7 +54,7 @@ body { font-feature-settings: 'ss01', 'tnum'; }
 /* paneles: vidrio fino con esquinas técnicas */
 .comparador, .lab, .eval-det, .panel-foco, .panel-piloto, .slot, .app, .semanas button, .pilotos-lista button, .toggle, .chip, .caso { border-radius: 3px; }
 .comparador, .lab, .eval-det, .panel-foco, .panel-piloto {
-  background: linear-gradient(180deg, rgba(20, 22, 28, .74), rgba(8, 9, 12, .8));
+  background: linear-gradient(180deg, rgba(20, 22, 28, .74), rgba(14, 15, 13, .8));
   border: 1px solid var(--linea);
   box-shadow: 0 30px 80px -30px rgba(0, 0, 0, .8), inset 0 1px 0 rgba(255, 255, 255, .04);
 }
@@ -76,14 +76,14 @@ body { font-feature-settings: 'ss01', 'tnum'; }
 .comp-tabs button, .lab-tabs button, .eval-lista button { border-radius: 2px; }
 .comp-tabs button.on, .lab-tabs button.on, .eval-lista button.on { background: transparent; color: var(--blanco); box-shadow: inset 0 -1px 0 var(--lima); }
 .toggle i, .toggle i::after { border-radius: 1px; }
-.cursor-anillo { width: 30px; height: 30px; margin: -15px; border-color: rgba(244, 243, 239, .35); }
+.cursor-anillo { width: 30px; height: 30px; margin: -15px; border-color: rgba(245, 243, 235, .35); }
 
 /* caso Tierra Bomba */
-.caso { display: grid; gap: 6px; margin-top: 14px; padding: 14px 16px; border: 1px solid var(--linea-f); text-decoration: none; background: rgba(79, 209, 197, .05); transition: border-color .3s, background .3s; }
-.caso:hover { border-color: #4FD1C5; background: rgba(79, 209, 197, .1); }
-.caso .mono { color: #4FD1C5; }
+.caso { display: grid; gap: 6px; margin-top: 14px; padding: 14px 16px; border: 1px solid var(--linea-f); text-decoration: none; background: rgba(111, 163, 175, .05); transition: border-color .3s, background .3s; }
+.caso:hover { border-color: #6FA3AF; background: rgba(111, 163, 175, .1); }
+.caso .mono { color: #6FA3AF; }
 .caso b { font-size: 15px; font-weight: 600; letter-spacing: -.01em; line-height: 1.3; }
-.caso small { color: rgba(244, 243, 239, .65); font-size: 12.5px; line-height: 1.55; }
+.caso small { color: rgba(245, 243, 235, .65); font-size: 12.5px; line-height: 1.55; }
 .caso-ir { color: var(--blanco) !important; margin-top: 4px; }
 .caso-ir::after { content: ''; display: inline-block; width: 18px; height: 1px; background: currentColor; margin-left: 10px; vertical-align: middle; transition: width .4s var(--ease); }
 .caso:hover .caso-ir::after { width: 34px; }

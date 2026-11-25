@@ -9,7 +9,7 @@ import { empezar } from '../../ui/acciones';
 export default function Intro() {
   const { texto, esquina } = useMemo(() => logoGeometria(), []);
   const mat = useMemo(() => materialIridiscente('#d8dbe4'), []);
-  const matEsq = useMemo(() => { const m = materialIridiscente('#D5FF3F'); m.metalness = 0.6; m.emissive = new THREE.Color('#D5FF3F'); m.emissiveIntensity = 0.35; return m; }, []);
+  const matEsq = useMemo(() => { const m = materialIridiscente('#C7FF27'); m.metalness = 0.6; m.emissive = new THREE.Color('#C7FF27'); m.emissiveIntensity = 0.35; return m; }, []);
   const g = useRef<THREE.Group>(null!);
   const anillo = useRef<THREE.Mesh>(null!);
   const [hover, setHover] = useState(false);
@@ -55,7 +55,7 @@ export default function Intro() {
         <primitive object={mat} attach="material" />
       </mesh>
       <mesh geometry={tubo}>
-        <meshPhysicalMaterial color="#9fb0ff" metalness={0.2} roughness={0.05} transmission={0.6} thickness={1} iridescence={1} transparent opacity={0.85} />
+        <meshPhysicalMaterial color="#C9C0E4" metalness={0.2} roughness={0.05} transmission={0.6} thickness={1} iridescence={1} transparent opacity={0.85} />
       </mesh>
     </group>
   );

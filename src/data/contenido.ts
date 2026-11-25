@@ -80,7 +80,7 @@ export const PILOTOS: {
   workshops: string[]; demo: string; entregable: string; color: string; transicion: string;
 }[] = [
   {
-    id: 'habitat', n: '01', nombre: 'Hábitat del Siglo XXI', profesor: 'Gonzalo Correal', color: '#D5FF3F',
+    id: 'habitat', n: '01', nombre: 'Hábitat del Siglo XXI', profesor: 'Gonzalo Correal', color: '#C7FF27',
     escenario: 'Conjunto habitacional con variables ambientales y espaciales manipulables.',
     workshops: ['Programación aplicada al diseño', 'Simulación del comportamiento espacial', 'Exploración de alternativas habitacionales', 'Visualización de variables ambientales', 'Desarrollo de herramientas interactivas'],
     demo: 'Un modelo de vivienda que se transforma al modificar ocupación, orientación, iluminación o configuración espacial.',
@@ -88,7 +88,7 @@ export const PILOTOS: {
     transicion: 'El modelo se descompone en módulos habitacionales.',
   },
   {
-    id: 'urbanos', n: '02', nombre: 'Centros Urbanos', profesor: 'Juan Jacobo Molina', color: '#304FFE',
+    id: 'urbanos', n: '02', nombre: 'Centros Urbanos', profesor: 'Juan Jacobo Molina', color: '#A99BCB',
     escenario: 'Ciudad con redes, edificios, infraestructuras y sistemas ambientales.',
     workshops: ['Cartografía interactiva', 'Análisis territorial mediante programación', 'Visualización de datos urbanos', 'Teoría de redes', 'Simulación de escenarios urbanos'],
     demo: 'Una ciudad donde se activan y desactivan capas de movilidad, equipamientos, espacio público, estructura ecológica y usos; las relaciones entre sistemas se actualizan.',
@@ -96,7 +96,7 @@ export const PILOTOS: {
     transicion: 'La cámara se eleva y los edificios se convierten en una red urbana.',
   },
   {
-    id: 'patrimonio', n: '03', nombre: 'Patrimonio', profesor: 'Ernesto Moure', color: '#F4F3EF',
+    id: 'patrimonio', n: '03', nombre: 'Patrimonio', profesor: 'Ernesto Moure', color: '#F5F3EB',
     escenario: 'Estructura patrimonial que se reconstruye mediante una nube de puntos y geometrías tridimensionales.',
     workshops: ['Digitalización arquitectónica', 'Visualización tridimensional', 'Recorridos virtuales', 'Narrativas espaciales', 'Plataformas de divulgación patrimonial'],
     demo: 'Un edificio patrimonial que alterna entre representación histórica, levantamiento digital, modelo tridimensional y recorrido interactivo.',
@@ -104,7 +104,7 @@ export const PILOTOS: {
     transicion: 'La geometría se fragmenta en una nube de puntos y se reconstruye.',
   },
   {
-    id: 'territorios', n: '04', nombre: 'Nuevos Territorios', profesor: 'Por coordinar con la Facultad', color: '#4FD1C5',
+    id: 'territorios', n: '04', nombre: 'Nuevos Territorios', profesor: 'Por coordinar con la Facultad', color: '#6FA3AF',
     escenario: 'Territorio con topografía, cuerpos de agua, vegetación, asentamientos y condiciones ambientales. Caso demostrativo posible: Tierra Bomba, sujeto a los alcances del proyecto académico.',
     workshops: ['Simulación ambiental y territorial', 'Cartografía de sistemas socioecológicos', 'Visualización de variables climáticas', 'Herramientas de participación comunitaria', 'Simulación de estrategias arquitectónicas', 'Interfaces accesibles para comunidades'],
     demo: 'Un territorio interactivo donde se activan estrategias de agua, energía, vegetación, infraestructura, equipamientos y condiciones ambientales.',

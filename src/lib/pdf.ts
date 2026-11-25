@@ -3,16 +3,16 @@ import { AUTORAS, AVISO, HERO, INDICADORES, METODO, ORIGEN, OPORTUNIDAD, PILOTOS
 import type { Crono } from './crono';
 import { fechasSemana } from './crono';
 
-const NEGRO = [8, 9, 12] as const;
-const LIMA = [213, 255, 63] as const;
-const AZUL = [48, 79, 254] as const;
+const NEGRO = [14, 15, 13] as const;
+const LIMA = [199, 255, 39] as const;
+const AZUL = [169, 155, 203] as const;
 
 function base(titulo: string) {
   const doc = new jsPDF({ unit: 'mm', format: 'a4' });
   let y = 0;
   const pagina = () => {
     doc.setFillColor(...NEGRO); doc.rect(0, 0, 210, 18, 'F');
-    doc.setTextColor(244, 243, 239); doc.setFont('helvetica', 'bold'); doc.setFontSize(14); doc.text('urbia', 14, 12);
+    doc.setTextColor(245, 243, 235); doc.setFont('helvetica', 'bold'); doc.setFontSize(14); doc.text('urbia', 14, 12);
     doc.setDrawColor(...LIMA); doc.setLineWidth(1.2); doc.lines([[3.2, 0], [0, 3.2]], 30.5, 7.2);
     doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(140, 146, 156);
     doc.text(titulo.toUpperCase(), 196, 11.5, { align: 'right' });

@@ -43,14 +43,14 @@ function Piso({ i, visible, sel, t }: { i: number; visible: boolean; sel: boolea
       <group onClick={(e) => { e.stopPropagation(); useSt.getState().set({ rutaPaso: i }); }}
         onPointerOver={() => (document.body.dataset.cursor = 'activo')}
         onPointerOut={() => (document.body.dataset.cursor = '')}>
-        <mesh position={[0, 0.3, 0]}><boxGeometry args={[ancho, 0.6, 18]} /><meshPhysicalMaterial color={sel ? '#304FFE' : '#1a1d24'} emissive="#304FFE" emissiveIntensity={sel ? 0.5 : 0.05} clearcoat={1} roughness={0.3} /></mesh>
+        <mesh position={[0, 0.3, 0]}><boxGeometry args={[ancho, 0.6, 18]} /><meshPhysicalMaterial color={sel ? '#A99BCB' : '#1a1d24'} emissive="#A99BCB" emissiveIntensity={sel ? 0.5 : 0.05} clearcoat={1} roughness={0.3} /></mesh>
         {cols.map(([x, z], j) => (
-          <mesh key={j} position={[x * (ancho / 30), H / 2, z]}><boxGeometry args={[0.7, H, 0.7]} /><meshStandardMaterial color="#F4F3EF" /></mesh>
+          <mesh key={j} position={[x * (ancho / 30), H / 2, z]}><boxGeometry args={[0.7, H, 0.7]} /><meshStandardMaterial color="#F5F3EB" /></mesh>
         ))}
-        <lineSegments position={[0, H / 2, 0]}><edgesGeometry args={[new THREE.BoxGeometry(ancho, H, 18)]} /><lineBasicMaterial color={sel ? '#D5FF3F' : '#3a3f4a'} /></lineSegments>
+        <lineSegments position={[0, H / 2, 0]}><edgesGeometry args={[new THREE.BoxGeometry(ancho, H, 18)]} /><lineBasicMaterial color={sel ? '#C7FF27' : '#3a3f4a'} /></lineSegments>
       </group>
-      <Text font={MONO} fontSize={1.2} color="#D5FF3F" position={[ancho / 2 + 1.5, 1.5, 9]} anchorX="left">{String(i + 1).padStart(2, '0')}</Text>
-      <Text font={FUENTE_B} fontSize={1.5} color="#F4F3EF" position={[ancho / 2 + 4, 1.5, 9]} anchorX="left" maxWidth={24}>{t}</Text>
+      <Text font={MONO} fontSize={1.2} color="#C7FF27" position={[ancho / 2 + 1.5, 1.5, 9]} anchorX="left">{String(i + 1).padStart(2, '0')}</Text>
+      <Text font={FUENTE_B} fontSize={1.5} color="#F5F3EB" position={[ancho / 2 + 4, 1.5, 9]} anchorX="left" maxWidth={24}>{t}</Text>
     </group>
   );
 }
@@ -65,8 +65,8 @@ function Grua({ alto }: { alto: number }) {
     <group position={[-24, 0, -8]}>
       <mesh position={[0, 30, 0]}><boxGeometry args={[0.4, 60, 0.4]} /><meshBasicMaterial color="#5a606b" wireframe /></mesh>
       <group ref={g}>
-        <mesh position={[14, 0, 0]}><boxGeometry args={[34, 0.3, 0.3]} /><meshBasicMaterial color="#8C929C" /></mesh>
-        <mesh position={[24, -6, 0]}><boxGeometry args={[0.08, 12, 0.08]} /><meshBasicMaterial color="#F4F3EF" /></mesh>
+        <mesh position={[14, 0, 0]}><boxGeometry args={[34, 0.3, 0.3]} /><meshBasicMaterial color="#898D84" /></mesh>
+        <mesh position={[24, -6, 0]}><boxGeometry args={[0.08, 12, 0.08]} /><meshBasicMaterial color="#F5F3EB" /></mesh>
       </group>
     </group>
   );

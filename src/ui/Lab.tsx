@@ -81,10 +81,10 @@ function DemoTerritorio() {
       const v = h[k]; const px = (k % N) * s, py = ((k / N) | 0) * s;
       if (v >= 0.2) tierra++;
       if (agua[k] && v >= 0.2) inund++;
-      x.fillStyle = barrera[k] ? '#D5FF3F' : agua[k] ? (v < 0.2 ? '#0e2a44' : '#304FFE') : `rgb(${40 + v * 160},${50 + v * 150},${40 + v * 90})`;
+      x.fillStyle = barrera[k] ? '#C7FF27' : agua[k] ? (v < 0.2 ? '#0e2a44' : '#A99BCB') : `rgb(${40 + v * 160},${50 + v * 150},${40 + v * 90})`;
       x.fillRect(px, py, s + 0.5, s + 0.5);
     }
-    x.fillStyle = '#08090C'; x.fillRect(6, 6, 260, 24); x.fillStyle = '#F4F3EF'; x.font = '12px JetBrains Mono';
+    x.fillStyle = '#0E0F0D'; x.fillRect(6, 6, 260, 24); x.fillStyle = '#F5F3EB'; x.font = '12px JetBrains Mono';
     x.fillText('Celdas de tierra inundadas: ' + Math.round((inund / Math.max(1, tierra)) * 100) + '%', 12, 22);
   };
   useEffect(simular, [nivel]);
@@ -95,7 +95,7 @@ function DemoTerritorio() {
     simular();
   };
   return (
-    <div>
+    <div className="lab-2col">
       <p className="ayuda">Autómata de inundación sobre un terreno sintético. Suba el nivel del agua y dibuje barreras (manglar o dique) para proteger zonas. Modelo ilustrativo, sin calibración.</p>
       <canvas ref={cv} width={432} height={432} className="lab-canvas" onPointerDown={pintar} onPointerMove={pintar} />
       <label className="control"><span className="mono">Nivel del agua {nivel.toFixed(2)}</span><input type="range" min={0.1} max={0.7} step={0.01} value={nivel} onChange={(e) => setNivel(+e.target.value)} /></label>
@@ -119,9 +119,9 @@ function DemoRed() {
     const gL = svg.append('g'); const gN = svg.append('g');
     const actualizar = () => {
       const grado: Record<number, number> = {}; links.forEach((l) => { grado[l.source.id ?? l.source] = (grado[l.source.id ?? l.source] || 0) + 1; grado[l.target.id ?? l.target] = (grado[l.target.id ?? l.target] || 0) + 1; });
-      const L = gL.selectAll<SVGLineElement, any>('line').data(links).join('line').attr('stroke', '#304FFE').attr('stroke-opacity', 0.7);
+      const L = gL.selectAll<SVGLineElement, any>('line').data(links).join('line').attr('stroke', '#A99BCB').attr('stroke-opacity', 0.7);
       const N = gN.selectAll<SVGCircleElement, any>('circle').data(nodos).join('circle')
-        .attr('r', (d) => 4 + (grado[d.id] || 0) * 1.6).attr('fill', (d) => ((grado[d.id] || 0) > 4 ? '#D5FF3F' : '#F4F3EF')).style('cursor', 'grab')
+        .attr('r', (d) => 4 + (grado[d.id] || 0) * 1.6).attr('fill', (d) => ((grado[d.id] || 0) > 4 ? '#C7FF27' : '#F5F3EB')).style('cursor', 'grab')
         .call(d3.drag<SVGCircleElement, any>().on('start', (e, d) => { if (!e.active) sim.alphaTarget(0.3).restart(); d.fx = d.x; d.fy = d.y; }).on('drag', (e, d) => { d.fx = e.x; d.fy = e.y; }).on('end', (e, d) => { if (!e.active) sim.alphaTarget(0); d.fx = null; d.fy = null; }));
       N.on('dblclick', (_e, d) => { const nuevo = { id: nodos.length, x: d.x + 10, y: d.y + 10 }; nodos.push(nuevo); links.push({ source: nuevo, target: d }); sim.nodes(nodos); (sim.force('link') as any).links(links); sim.alpha(0.8).restart(); actualizar(); });
       sim.on('tick', () => { L.attr('x1', (d) => d.source.x).attr('y1', (d) => d.source.y).attr('x2', (d) => d.target.x).attr('y2', (d) => d.target.y); N.attr('cx', (d) => d.x).attr('cy', (d) => d.y); });
@@ -152,7 +152,7 @@ function DemoDatos() {
     svg.selectAll<SVGGElement, null>('g.ex').data([null]).join('g').attr('class', 'ex').attr('transform', `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickSizeOuter(0) as any);
     svg.selectAll<SVGGElement, null>('g.ey').data([null]).join('g').attr('class', 'ey').attr('transform', `translate(${m.l},0)`).transition().duration(700).call(d3.axisLeft(y).ticks(5) as any);
     svg.selectAll<SVGRectElement, any>('rect').data(datos, (d: any) => d.k).join((e) => e.append('rect').attr('y', H - m.b).attr('height', 0))
-      .attr('x', (d) => x(d.k)!).attr('width', x.bandwidth()).attr('fill', (_d, i) => (i % 2 ? '#304FFE' : '#D5FF3F'))
+      .attr('x', (d) => x(d.k)!).attr('width', x.bandwidth()).attr('fill', (_d, i) => (i % 2 ? '#A99BCB' : '#C7FF27'))
       .transition().duration(900).ease(d3.easeCubicOut).delay((_d, i) => i * 60).attr('y', (d) => y(d.y)).attr('height', (d) => H - m.b - y(d.y));
   }, [v]);
   return (
@@ -164,8 +164,8 @@ function DemoDatos() {
   );
 }
 
-const CODIGO = `// x, y entre 0 y 1; t = tiempo en segundos
-// devuelva un valor 0..1: altura y color del punto
+const CODIGO = `// x, y: 0..1 · t: segundos
+// devuelve 0..1 (tamaño y color)
 const d = Math.hypot(x - 0.5, y - 0.5);
 return 0.5 + 0.5 * Math.sin(d * 28 - t * 2);`;
 function DemoCodigo() {
@@ -180,7 +180,7 @@ function DemoCodigo() {
     let id = 0;
     const f = (tm: number) => {
       const c = cv.current; if (!c) return; const x = c.getContext('2d')!; const n = 36, s = c.width / n;
-      x.fillStyle = '#08090C'; x.fillRect(0, 0, c.width, c.height);
+      x.fillStyle = '#0E0F0D'; x.fillRect(0, 0, c.width, c.height);
       for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) {
         let v = 0; try { v = Math.min(1, Math.max(0, +fn.current(i / n, j / n, tm / 1000) || 0)); } catch { v = 0; }
         x.fillStyle = `rgb(${48 + v * 165},${79 + v * 176},${254 - v * 191})`;

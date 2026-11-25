@@ -98,7 +98,7 @@ export default function Patrimonio() {
     const lm = linea.current.material as THREE.LineBasicMaterial;
     const lOp = modo === 'historica' ? 1 : modo === 'modelo' ? 0.35 : 0.12;
     lm.opacity += (lOp * u - lm.opacity) * 0.08;
-    lm.color.lerp(new THREE.Color(modo === 'historica' ? '#c9a46a' : '#F4F3EF'), 0.08);
+    lm.color.lerp(new THREE.Color(modo === 'historica' ? '#c9a46a' : '#F5F3EB'), 0.08);
     plano.current.visible = modo === 'levantamiento';
     plano.current.position.y = uni.uScan.value;
     const pm = papel.current.material as THREE.MeshBasicMaterial;
@@ -117,11 +117,11 @@ export default function Patrimonio() {
         <meshStandardMaterial color="#e9e1d3" roughness={0.85} transparent opacity={0} />
       </mesh>
       <lineSegments ref={linea} geometry={bordes}>
-        <lineBasicMaterial color="#F4F3EF" transparent opacity={0} />
+        <lineBasicMaterial color="#F5F3EB" transparent opacity={0} />
       </lineSegments>
       <mesh ref={plano} rotation-x={-Math.PI / 2}>
         <planeGeometry args={[70, 60]} />
-        <meshBasicMaterial color="#D5FF3F" transparent opacity={0.012} side={THREE.DoubleSide} depthWrite={false} />
+        <meshBasicMaterial color="#C7FF27" transparent opacity={0.012} side={THREE.DoubleSide} depthWrite={false} />
       </mesh>
       <mesh rotation-x={-Math.PI / 2} position={[8, -0.05, 0]}><circleGeometry args={[55, 64]} /><meshStandardMaterial color="#121318" /></mesh>
     </group>

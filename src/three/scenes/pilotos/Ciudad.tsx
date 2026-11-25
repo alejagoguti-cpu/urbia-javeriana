@@ -9,7 +9,7 @@ import { presencia } from '../Pilotos';
 const B = 10, C = 4, NB = 11; // manzana, calle, número
 const paso = B + C;
 const ext = (NB * paso) / 2;
-const USOS = ['#F4F3EF', '#304FFE', '#D5FF3F', '#ff7a59'];
+const USOS = ['#F5F3EB', '#A99BCB', '#C7FF27', '#E36C4B'];
 export const USOS_NOMBRE = ['Residencial', 'Comercio y servicios', 'Mixto', 'Institucional'];
 
 function rnd(s: number) { const x = Math.sin(s * 127.1) * 43758.5453; return x - Math.floor(x); }
@@ -138,20 +138,20 @@ export default function Ciudad() {
   return (
     <group>
       <mesh rotation-x={-Math.PI / 2} position={[0, -0.05, 0]}><planeGeometry args={[ext * 2 + 30, ext * 2 + 30]} /><meshStandardMaterial color="#0c0e13" roughness={1} /></mesh>
-      <lineSegments geometry={calles}><lineBasicMaterial color="#304FFE" transparent opacity={0.55} /></lineSegments>
+      <lineSegments geometry={calles}><lineBasicMaterial color="#A99BCB" transparent opacity={0.55} /></lineSegments>
       <instancedMesh ref={inst} args={[undefined, undefined, data.ed.length]} frustumCulled={false}>
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial roughness={0.6} metalness={0.1} />
       </instancedMesh>
-      <lineSegments ref={red} geometry={redEd}><lineBasicMaterial color="#D5FF3F" transparent opacity={0.8} /></lineSegments>
+      <lineSegments ref={red} geometry={redEd}><lineBasicMaterial color="#C7FF27" transparent opacity={0.8} /></lineSegments>
       <points ref={flujoM} geometry={flujo.g} frustumCulled={false}>
-        <pointsMaterial color="#F4F3EF" size={0.9} transparent opacity={0.95} depthWrite={false} blending={THREE.AdditiveBlending} />
+        <pointsMaterial color="#F5F3EB" size={0.9} transparent opacity={0.95} depthWrite={false} blending={THREE.AdditiveBlending} />
       </points>
       <group ref={equipos}>
         {data.equip.map((q, i) => (
           <group key={i} position={q}>
-            <mesh position={[0, 6, 0]}><cylinderGeometry args={[2.2, 2.2, 12, 24]} /><meshStandardMaterial color="#ff7a59" emissive="#ff7a59" emissiveIntensity={0.5} /></mesh>
-            <mesh rotation-x={-Math.PI / 2} position={[0, 0.3, 0]}><ringGeometry args={[23.4, 24, 64]} /><meshBasicMaterial color="#ff7a59" transparent opacity={0.6} side={THREE.DoubleSide} /></mesh>
+            <mesh position={[0, 6, 0]}><cylinderGeometry args={[2.2, 2.2, 12, 24]} /><meshStandardMaterial color="#E36C4B" emissive="#E36C4B" emissiveIntensity={0.5} /></mesh>
+            <mesh rotation-x={-Math.PI / 2} position={[0, 0.3, 0]}><ringGeometry args={[23.4, 24, 64]} /><meshBasicMaterial color="#E36C4B" transparent opacity={0.6} side={THREE.DoubleSide} /></mesh>
           </group>
         ))}
       </group>
@@ -161,10 +161,10 @@ export default function Ciudad() {
         ))}
       </group>
       <group ref={rioG}>
-        <mesh geometry={rioGeo}><meshPhysicalMaterial color="#4FD1C5" emissive="#1a6d66" emissiveIntensity={0.6} roughness={0.1} /></mesh>
+        <mesh geometry={rioGeo}><meshPhysicalMaterial color="#6FA3AF" emissive="#1a6d66" emissiveIntensity={0.6} roughness={0.1} /></mesh>
         <mesh geometry={corredor} scale={[1, 0.05, 1]}><meshBasicMaterial color="#2f7d3a" transparent opacity={0.5} /></mesh>
       </group>
-      <lineSegments geometry={rel}><lineBasicMaterial color="#F4F3EF" transparent opacity={0.85} /></lineSegments>
+      <lineSegments geometry={rel}><lineBasicMaterial color="#F5F3EB" transparent opacity={0.85} /></lineSegments>
     </group>
   );
 }

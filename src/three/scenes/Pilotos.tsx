@@ -48,14 +48,14 @@ export default function Pilotos() {
   return (
     <group>
       <group ref={hub}>
-        <mesh><icosahedronGeometry args={[6, 1]} /><meshBasicMaterial color="#D5FF3F" wireframe /></mesh>
-        <mesh><icosahedronGeometry args={[3, 4]} /><meshPhysicalMaterial color="#F4F3EF" metalness={1} roughness={0.1} iridescence={1} /></mesh>
+        <mesh><icosahedronGeometry args={[6, 1]} /><meshBasicMaterial color="#C7FF27" wireframe /></mesh>
+        <mesh><icosahedronGeometry args={[3, 4]} /><meshPhysicalMaterial color="#F5F3EB" metalness={1} roughness={0.1} iridescence={1} /></mesh>
       </group>
       {haces.map((g, i) => (
         <mesh key={i} geometry={g}><meshBasicMaterial color={PILOTOS[i].color} transparent opacity={0.35} /></mesh>
       ))}
       <points geometry={flujo.g} frustumCulled={false}>
-        <pointsMaterial color="#F4F3EF" size={0.7} transparent opacity={0.8} depthWrite={false} blending={THREE.AdditiveBlending} />
+        <pointsMaterial color="#F5F3EB" size={0.7} transparent opacity={0.8} depthWrite={false} blending={THREE.AdditiveBlending} />
       </points>
       {PILOTOS.map((p, i) => (
         <group key={p.id} position={UNIVERSO[i]}>
@@ -93,7 +93,7 @@ function Etiqueta({ k }: { k: number }) {
         <meshBasicMaterial transparent opacity={0} depthWrite={false} />
       </mesh>
       <Text font={MONO} fontSize={2.4} color={p.color} anchorX="center" position={[0, 6, 0]}>{'PILOTO ' + p.n}</Text>
-      <Text font={FUENTE_B} fontSize={4.6} color="#F4F3EF" anchorX="center" anchorY="top" position={[0, 3.6, 0]} maxWidth={60} textAlign="center">{p.nombre}</Text>
+      <Text font={FUENTE_B} fontSize={4.6} color="#F5F3EB" anchorX="center" anchorY="top" position={[0, 3.6, 0]} maxWidth={60} textAlign="center">{p.nombre}</Text>
     </group>
   );
 }

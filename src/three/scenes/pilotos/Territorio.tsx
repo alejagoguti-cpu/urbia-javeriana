@@ -168,24 +168,24 @@ export default function Territorio() {
       <group ref={g.veg}><Instancias pts={capas.manglar} geo={copa} color="#2e7a45" s={1.3} /></group>
       <group ref={g.ref}><Instancias pts={capas.reforest} geo={arbol} color="#4f8f3a" s={1.1} /></group>
       <group ref={g.sol}>
-        <Instancias pts={capas.solar} geo={panelG} color="#304FFE" />
+        <Instancias pts={capas.solar} geo={panelG} color="#A99BCB" />
       </group>
       <group ref={g.agua}>
         {capas.agua.map((p, i) => (
           <group key={i} position={p}>
-            <mesh rotation-x={-Math.PI / 2} position={[0, 0.25, 0]}><circleGeometry args={[3.2, 32]} /><meshPhysicalMaterial color="#4FD1C5" emissive="#1d6f69" emissiveIntensity={0.6} roughness={0.05} /></mesh>
-            <mesh position={[0, 0.3, 0]} rotation-x={-Math.PI / 2}><ringGeometry args={[3.2, 3.7, 32]} /><meshBasicMaterial color="#F4F3EF" side={THREE.DoubleSide} /></mesh>
+            <mesh rotation-x={-Math.PI / 2} position={[0, 0.25, 0]}><circleGeometry args={[3.2, 32]} /><meshPhysicalMaterial color="#6FA3AF" emissive="#1d6f69" emissiveIntensity={0.6} roughness={0.05} /></mesh>
+            <mesh position={[0, 0.3, 0]} rotation-x={-Math.PI / 2}><ringGeometry args={[3.2, 3.7, 32]} /><meshBasicMaterial color="#F5F3EB" side={THREE.DoubleSide} /></mesh>
           </group>
         ))}
       </group>
       <group ref={g.inf}>
-        {caminos.map((c, i) => <mesh key={i} geometry={c}><meshStandardMaterial color="#F4F3EF" emissive="#8C929C" emissiveIntensity={0.4} /></mesh>)}
+        {caminos.map((c, i) => <mesh key={i} geometry={c}><meshStandardMaterial color="#F5F3EB" emissive="#898D84" emissiveIntensity={0.4} /></mesh>)}
       </group>
       <group ref={g.eq}>
         {pueblos.map((p, i) => (
           <group key={i} position={p}>
-            <mesh position={[3, 2.2, 3]}><boxGeometry args={[5, 4.4, 3.6]} /><meshStandardMaterial color="#ff7a59" emissive="#ff7a59" emissiveIntensity={0.35} /></mesh>
-            <mesh position={[3, 4.6, 3]} rotation-z={0.25}><boxGeometry args={[6, 0.3, 4.6]} /><meshStandardMaterial color="#F4F3EF" /></mesh>
+            <mesh position={[3, 2.2, 3]}><boxGeometry args={[5, 4.4, 3.6]} /><meshStandardMaterial color="#E36C4B" emissive="#E36C4B" emissiveIntensity={0.35} /></mesh>
+            <mesh position={[3, 4.6, 3]} rotation-z={0.25}><boxGeometry args={[6, 0.3, 4.6]} /><meshStandardMaterial color="#F5F3EB" /></mesh>
           </group>
         ))}
       </group>

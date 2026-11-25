@@ -20,25 +20,25 @@ function contenidoCapa(i: number) {
     const s: number[][] = [];
     for (let x = -W / 2; x <= W / 2; x += 5) s.push([x, -D / 2], [x, D / 2]);
     for (let z = -D / 2; z <= D / 2; z += 6.5) s.push([-W / 2, z], [W / 2, z]);
-    lin(s, '#8C929C', 0.5);
-    [[-8, -3], [10, 6]].forEach(([x, z]) => { const r = new THREE.Mesh(new THREE.RingGeometry(3.4, 3.8, 48), new THREE.MeshBasicMaterial({ color: '#D5FF3F', side: THREE.DoubleSide })); r.rotation.x = -Math.PI / 2; r.position.set(x, 0.8, z); g.add(r); });
+    lin(s, '#898D84', 0.5);
+    [[-8, -3], [10, 6]].forEach(([x, z]) => { const r = new THREE.Mesh(new THREE.RingGeometry(3.4, 3.8, 48), new THREE.MeshBasicMaterial({ color: '#C7FF27', side: THREE.DoubleSide })); r.rotation.x = -Math.PI / 2; r.position.set(x, 0.8, z); g.add(r); });
   }
   if (i === 1) { // tecnología: nodos de herramientas
-    for (let k = 0; k < 24; k++) { const m = new THREE.Mesh(new THREE.OctahedronGeometry(0.9), new THREE.MeshStandardMaterial({ color: k % 5 === 0 ? '#D5FF3F' : '#304FFE', emissive: k % 5 === 0 ? '#D5FF3F' : '#304FFE', emissiveIntensity: 0.4 })); m.position.set((Math.random() - 0.5) * W * 0.9, 1.6, (Math.random() - 0.5) * D * 0.9); g.add(m); }
+    for (let k = 0; k < 24; k++) { const m = new THREE.Mesh(new THREE.OctahedronGeometry(0.9), new THREE.MeshStandardMaterial({ color: k % 5 === 0 ? '#C7FF27' : '#A99BCB', emissive: k % 5 === 0 ? '#C7FF27' : '#A99BCB', emissiveIntensity: 0.4 })); m.position.set((Math.random() - 0.5) * W * 0.9, 1.6, (Math.random() - 0.5) * D * 0.9); g.add(m); }
   }
   if (i === 2) { // ejercicio guiado: recorrido paso a paso
     const pts: number[][] = []; let x = -W / 2 + 3, z = -D / 2 + 3;
     for (let k = 0; k < 10; k++) { const nx = x + 3.6, nz = k % 2 ? -D / 2 + 3 : D / 2 - 3; pts.push([x, z], [nx, nz]); x = nx; z = nz; }
-    lin(pts, '#F4F3EF', 0.9);
+    lin(pts, '#F5F3EB', 0.9);
   }
   if (i === 3) { // aplicación al proyecto: volumetría
-    for (let k = 0; k < 18; k++) { const h = 2 + Math.random() * 7; const m = new THREE.Mesh(new THREE.BoxGeometry(4, h, 4), new THREE.MeshPhysicalMaterial({ color: '#F4F3EF', roughness: 0.4, transparent: true, opacity: 0.85 })); m.position.set(-W / 2 + 4 + (k % 6) * 6.4, h / 2 + 0.6, -D / 2 + 5 + Math.floor(k / 6) * 8); g.add(m); }
+    for (let k = 0; k < 18; k++) { const h = 2 + Math.random() * 7; const m = new THREE.Mesh(new THREE.BoxGeometry(4, h, 4), new THREE.MeshPhysicalMaterial({ color: '#F5F3EB', roughness: 0.4, transparent: true, opacity: 0.85 })); m.position.set(-W / 2 + 4 + (k % 6) * 6.4, h / 2 + 0.6, -D / 2 + 5 + Math.floor(k / 6) * 8); g.add(m); }
   }
   if (i === 4) { // evaluar y documentar: nube de puntos de registro
     const n = 1400; const p = new Float32Array(n * 3);
     for (let k = 0; k < n; k++) p.set([(Math.random() - 0.5) * W, 0.8 + Math.random() * 2.5 * Math.random(), (Math.random() - 0.5) * D], k * 3);
     const geo = new THREE.BufferGeometry(); geo.setAttribute('position', new THREE.BufferAttribute(p, 3));
-    g.add(new THREE.Points(geo, new THREE.PointsMaterial({ color: '#D5FF3F', size: 0.25 })));
+    g.add(new THREE.Points(geo, new THREE.PointsMaterial({ color: '#C7FF27', size: 0.25 })));
   }
   return g;
 }
@@ -81,11 +81,11 @@ export default function Metodo() {
           </mesh>
           <lineSegments>
             <edgesGeometry args={[new THREE.BoxGeometry(42, 1.2, 28)]} />
-            <lineBasicMaterial color={i === capa ? '#D5FF3F' : '#8C929C'} transparent opacity={1} />
+            <lineBasicMaterial color={i === capa ? '#C7FF27' : '#898D84'} transparent opacity={1} />
           </lineSegments>
           <primitive object={contenidos[i]} />
-          <Text font={MONO} fontSize={1.3} position={[-22.5, 0.2, 14.5]} color="#D5FF3F" anchorX="right" anchorY="middle">{c.n}</Text>
-          <Text font={FUENTE_B} fontSize={1.5} position={[22.5, 1.5, 14.2]} color="#F4F3EF" anchorX="right" anchorY="bottom" maxWidth={30} textAlign="right">{c.t}</Text>
+          <Text font={MONO} fontSize={1.3} position={[-22.5, 0.2, 14.5]} color="#C7FF27" anchorX="right" anchorY="middle">{c.n}</Text>
+          <Text font={FUENTE_B} fontSize={1.5} position={[22.5, 1.5, 14.2]} color="#F5F3EB" anchorX="right" anchorY="bottom" maxWidth={30} textAlign="right">{c.t}</Text>
         </group>
       ))}
     </group>

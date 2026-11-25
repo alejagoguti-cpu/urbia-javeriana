@@ -82,13 +82,13 @@ export default function Habitat() {
       <group ref={grupo}>
         <instancedMesh ref={inst} args={[undefined, undefined, MAX]} castShadow receiveShadow frustumCulled={false}>
           <boxGeometry args={[1, 1, 1]} />
-          <meshStandardMaterial color="#F4F3EF" roughness={0.55} metalness={0.05} />
+          <meshStandardMaterial color="#F5F3EB" roughness={0.55} metalness={0.05} />
         </instancedMesh>
         <lineSegments position={[0, 0.05, 0]} rotation-x={-Math.PI / 2}>
           <edgesGeometry args={[new THREE.PlaneGeometry(36, 36, 1, 1)]} />
-          <lineBasicMaterial color="#D5FF3F" />
+          <lineBasicMaterial color="#C7FF27" />
         </lineSegments>
-        <mesh position={[0, 0.2, 21]}><coneGeometry args={[1.2, 3, 3]} /><meshBasicMaterial color="#D5FF3F" /></mesh>
+        <mesh position={[0, 0.2, 21]}><coneGeometry args={[1.2, 3, 3]} /><meshBasicMaterial color="#C7FF27" /></mesh>
       </group>
       <mesh rotation-x={-Math.PI / 2} receiveShadow>
         <circleGeometry args={[46, 64]} />
@@ -103,7 +103,7 @@ function ArcoSolar() {
   const linea = useMemo(() => {
     const pts: THREE.Vector3[] = [];
     for (let i = 0; i <= 64; i++) { const a = (i / 64) * Math.PI; pts.push(new THREE.Vector3(Math.cos(a) * 60, Math.sin(a) * 50 + 4, -20)); }
-    return new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({ color: '#8C929C', transparent: true, opacity: 0.4 }));
+    return new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts), new THREE.LineBasicMaterial({ color: '#898D84', transparent: true, opacity: 0.4 }));
   }, []);
   return <primitive object={linea} />;
 }

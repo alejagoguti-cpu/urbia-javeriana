@@ -16,8 +16,8 @@ export default function Evaluacion() {
     svg.selectAll('*').interrupt().transition().duration(250).style('opacity', 0).remove();
     const g = svg.append('g').style('opacity', 0);
     g.transition().delay(250).duration(500).style('opacity', 1);
-    const vacio = (s: d3.Selection<any, any, any, any>) => s.attr('fill', 'none').attr('stroke', '#8C929C').attr('stroke-dasharray', '4 4');
-    const txt = (x: number, y: number, t: string, anchor = 'middle', c = '#8C929C') => g.append('text').attr('x', x).attr('y', y).attr('text-anchor', anchor).attr('fill', c).attr('font-size', 11).attr('font-family', 'JetBrains Mono').text(t);
+    const vacio = (s: d3.Selection<any, any, any, any>) => s.attr('fill', 'none').attr('stroke', '#898D84').attr('stroke-dasharray', '4 4');
+    const txt = (x: number, y: number, t: string, anchor = 'middle', c = '#898D84') => g.append('text').attr('x', x).attr('y', y).attr('text-anchor', anchor).attr('fill', c).attr('font-size', 11).attr('font-family', 'JetBrains Mono').text(t);
     if (d.tipo === 'serie') {
       const n = d.id === 'cont' ? 3 : 6;
       const x = d3.scalePoint().domain(d3.range(n).map(String)).range([50, W - 30]);
@@ -35,8 +35,8 @@ export default function Evaluacion() {
       et.forEach((t, i) => {
         const w = W - 80 - i * 70;
         const r = g.append('rect').attr('x', W / 2).attr('y', 20 + i * 58).attr('height', 44).attr('width', 0).attr('rx', 2);
-        vacio(r).attr('stroke', i === (d.id === 'fin' ? 2 : 3) ? '#D5FF3F' : '#8C929C').transition().delay(200 + i * 120).duration(700).ease(d3.easeCubicOut).attr('x', (W - w) / 2).attr('width', w);
-        txt(W / 2, 47 + i * 58, t + '  ·  n = ?', 'middle', i === (d.id === 'fin' ? 2 : 3) ? '#D5FF3F' : '#8C929C');
+        vacio(r).attr('stroke', i === (d.id === 'fin' ? 2 : 3) ? '#C7FF27' : '#898D84').transition().delay(200 + i * 120).duration(700).ease(d3.easeCubicOut).attr('x', (W - w) / 2).attr('width', w);
+        txt(W / 2, 47 + i * 58, t + '  ·  n = ?', 'middle', i === (d.id === 'fin' ? 2 : 3) ? '#C7FF27' : '#898D84');
       });
     }
     if (d.tipo === 'radar') {
@@ -52,8 +52,8 @@ export default function Evaluacion() {
         txt(cx + Math.cos(a) * (R + 26), cy + Math.sin(a) * (R + 18) + 4, e);
       });
       const leyenda = g.append('g').attr('transform', `translate(14, ${H - 34})`);
-      leyenda.append('line').attr('x2', 24).attr('stroke', '#304FFE').attr('stroke-dasharray', '4 4'); leyenda.append('text').attr('x', 30).attr('y', 4).attr('fill', '#8C929C').attr('font-size', 10).attr('font-family', 'JetBrains Mono').text('pre (semana 1)');
-      leyenda.append('line').attr('y1', 16).attr('y2', 16).attr('x2', 24).attr('stroke', '#D5FF3F').attr('stroke-dasharray', '4 4'); leyenda.append('text').attr('x', 30).attr('y', 20).attr('fill', '#8C929C').attr('font-size', 10).attr('font-family', 'JetBrains Mono').text('post (semana 6)');
+      leyenda.append('line').attr('x2', 24).attr('stroke', '#A99BCB').attr('stroke-dasharray', '4 4'); leyenda.append('text').attr('x', 30).attr('y', 4).attr('fill', '#898D84').attr('font-size', 10).attr('font-family', 'JetBrains Mono').text('pre (semana 1)');
+      leyenda.append('line').attr('y1', 16).attr('y2', 16).attr('x2', 24).attr('stroke', '#C7FF27').attr('stroke-dasharray', '4 4'); leyenda.append('text').attr('x', 30).attr('y', 20).attr('fill', '#898D84').attr('font-size', 10).attr('font-family', 'JetBrains Mono').text('post (semana 6)');
     }
     if (d.tipo === 'escala') {
       const et = ['1', '2', '3', '4', '5'];
@@ -71,7 +71,7 @@ export default function Evaluacion() {
         const y = 34 + i * 46;
         const r = g.append('rect').attr('x', 40).attr('y', y - 14).attr('width', 20).attr('height', 20);
         vacio(r).style('opacity', 0).transition().delay(150 + i * 110).style('opacity', 1);
-        g.append('text').attr('x', 74).attr('y', y + 1).attr('fill', '#F4F3EF').attr('font-size', 13).attr('font-family', 'Manrope').text(t).style('opacity', 0).transition().delay(200 + i * 110).style('opacity', 1);
+        g.append('text').attr('x', 74).attr('y', y + 1).attr('fill', '#F5F3EB').attr('font-size', 13).attr('font-family', 'Manrope').text(t).style('opacity', 0).transition().delay(200 + i * 110).style('opacity', 1);
       });
     }
   }, [d]);

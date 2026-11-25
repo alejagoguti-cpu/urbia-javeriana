@@ -1,0 +1,95 @@
+/* =====================================================================
+   AJUSTE A LA PANTALLA — tamaños que dependen del alto y del ancho,
+   para que todo quepa sin scroll (complementa src/ui/ajuste.ts)
+   ===================================================================== */
+.titulo-xl { font-size: clamp(34px, min(6.4vw, 10.5vh), 112px); }
+.titulo-l { font-size: clamp(26px, min(3.5vw, 6.4vh), 60px); }
+.titulo-m { font-size: clamp(24px, min(2.8vw, 5vh), 46px); }
+.sub { font-size: clamp(15px, min(1.4vw, 2.3vh), 21px); margin: min(22px, 2.4vh) 0 min(30px, 3.2vh); }
+.cuerpo { font-size: clamp(13.5px, min(1.05vw, 1.9vh), 15.5px); margin: min(18px, 1.9vh) 0; }
+.kicker { margin-bottom: min(14px, 1.5vh); }
+
+.ov { padding: calc(clamp(84px, 11.5vh, 104px) / var(--k, 1)) calc(28px / var(--k, 1)) calc(clamp(92px, 12vh, 100px) / var(--k, 1)) calc(90px / var(--k, 1)); }
+.ov.ov-izq { max-width: 680px; }
+.lab { max-height: none; overflow: visible; margin-top: min(18px, 2vh); }
+.eval { margin-top: min(18px, 2vh); }
+.panel-foco { max-height: calc(100vh - 190px); top: calc(50% + 6px); }
+.panel-piloto { top: calc(clamp(84px, 11vh, 96px) / var(--k, 1)); bottom: calc(clamp(88px, 11.5vh, 96px) / var(--k, 1)); left: calc(90px / var(--k, 1)); }
+.panel-foco { right: calc(28px / var(--k, 1)); }
+
+/* listas densas */
+.lista-capas button, .ruta li button { padding: min(11px, 1.25vh) 0; }
+.chips { margin: min(18px, 2vh) 0; }
+.tarjeta-nodo { margin: min(18px, 2vh) 0; }
+.slots { margin-top: min(24px, 2.6vh); }
+.slot { padding: min(12px, 1.3vh) 12px; }
+.semanas button { padding: min(10px, 1.1vh) 12px; }
+.pilotos-lista button { padding: min(16px, 1.7vh) 18px; }
+.eval-lista button { padding: min(9px, 1vh) 10px; }
+.lab-canvas { width: min(100%, 360px, 42vh); }
+.lab-svg { max-height: 40vh; }
+.eval-svg { max-height: 34vh; }
+.comp-lienzo { max-height: 52vh; }
+.jav-intro { height: clamp(56px, 10vh, 92px); }
+.final-marcas { margin-bottom: min(34px, 3.5vh); }
+.jav-final { height: clamp(56px, 10vh, 96px); }
+.final-marcas .final-logo { width: clamp(100px, 16vh, 150px); }
+
+/* escritorio: el desborde nunca se muestra como barra de scroll (lo resuelve el ajuste) */
+@media (min-width: 821px) {
+  .ov, .panel-piloto, .panel-foco { overflow: hidden; }
+  .ov-opor { grid-template-columns: minmax(0, .75fr) minmax(0, 1.25fr); }
+}
+/* pantallas bajas */
+@media (min-width: 821px) and (max-height: 800px) {
+  .ov-opor { gap: 24px; }
+  .comp-tabs button, .lab-tabs button { padding: 5px 9px; }
+}
+/* celular */
+@media (max-width: 820px) {
+  .ov { padding: calc(70px / var(--k, 1)) calc(16px / var(--k, 1)) calc(88px / var(--k, 1)); }
+  .panel-piloto { max-height: 60vh; bottom: 72px; }
+  .panel-foco { max-height: 64vh; bottom: 72px; top: auto; }
+  .comp-lienzo { aspect-ratio: 4 / 3; }
+  .lab-codigo textarea { min-height: 150px; }
+}
+
+/* bloques compactos */
+.caso { padding: min(14px, 1.5vh) 16px; gap: 4px; }
+.caso small { font-size: 12px; }
+.app { padding: min(12px, 1.2vh) 12px; gap: 4px; }
+.app small { display: none; }
+.panel-piloto .cuerpo { margin: min(12px, 1.3vh) 0; }
+.demo-ctrl { padding-top: min(14px, 1.4vh); }
+.toggle { padding: min(10px, 1.1vh) 12px; }
+.control { margin: min(8px, .9vh) 0; }
+.transicion { margin-top: min(16px, 1.6vh); }
+.ficha { margin-top: min(16px, 1.6vh); padding-top: min(12px, 1.2vh); }
+
+/* celular: paneles de piloto y laboratorio compactos para que quepan sin scroll */
+@media (max-width: 820px) {
+  .panel-piloto { max-height: calc(66vh / var(--k, 1)); padding: 16px; left: calc(12px / var(--k, 1)); right: calc(12px / var(--k, 1)); bottom: calc(72px / var(--k, 1)); top: auto; }
+  .panel-piloto .cuerpo, .panel-piloto .transicion, .caso small { display: none; }
+  .panel-piloto .titulo-m { font-size: 26px; }
+  .toggles { grid-template-columns: 1fr 1fr; gap: 4px; }
+  .toggle { font-size: 12px; padding: 8px; gap: 6px; }
+  .relaciones b { font-size: 24px; }
+  .apps { grid-template-columns: 1fr 1fr; }
+  .app .fila .btn-sec { padding: 6px 8px; font-size: 11px; }
+  .lab-tabs button { padding: 5px 7px; font-size: 11px; }
+}
+
+.eval-det { background: linear-gradient(180deg, rgba(16, 18, 24, .94), rgba(14, 15, 13, .96)); }
+
+/* laboratorio: lienzo al lado de los controles para no crecer en alto */
+@media (min-width: 821px) {
+  .lab-2col, .lab-codigo { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 16px; align-items: start; }
+  .lab-2col > .lab-canvas, .lab-codigo > .lab-canvas { grid-column: 2; grid-row: 1 / span 6; width: min(300px, 36vh); margin: 0; }
+  .lab-2col > *:not(canvas), .lab-codigo > *:not(canvas) { grid-column: 1; }
+  .lab-svg { max-height: 34vh; }
+}
+
+.lab-codigo textarea { height: 7.6em; min-height: 0; font-size: 11.5px; white-space: pre; overflow: hidden; }
+@media (min-width: 821px) { .apps { grid-template-columns: repeat(3, minmax(0, 1fr)); } .app b { font-size: 12.5px; line-height: 1.3; } }
+
+@media (min-width: 821px) { .ov-lab > div { max-width: min(780px, 54vw); } }

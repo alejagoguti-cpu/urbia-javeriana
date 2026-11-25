@@ -5,6 +5,7 @@ import { S, TOTAL, useSt } from '../store';
 import { irEscena, pantallaCompleta, volver, siguiente } from '../lib/nav';
 import { activarSonido } from '../lib/sonido';
 import { LOGO_TEXTO, LOGO_ESQUINA } from '../lib/logoPath';
+import IconoCromo from './IconoCromo';
 
 export function LogoSVG({ className = '' }: { className?: string }) {
   return (
@@ -85,16 +86,16 @@ export default function Chrome() {
             </div>
           )}
           <button className={'icono ' + (st.sonido ? 'on' : '')} aria-pressed={st.sonido} title="Sonido (desactivado por defecto)" onClick={() => { activarSonido(!st.sonido); st.set({ sonido: !st.sonido }); }}>
-            <svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z" />{st.sonido ? <path d="M16 8c1.5 1.2 1.5 6.8 0 8M19 5c3 2.5 3 11.5 0 14" fill="none" /> : <path d="M16 9l5 6M21 9l-5 6" fill="none" />}</svg>
+            <IconoCromo n={st.sonido ? 'sonido' : 'silencio'} lima={st.sonido} />
           </button>
           <button className={'icono ' + (st.reducido ? 'on' : '')} aria-pressed={st.reducido} title="Movimiento reducido" onClick={() => st.set({ reducido: !st.reducido })}>
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" fill="none" /><path d="M8 12h8" fill="none" /></svg>
+            <IconoCromo n="reducido" lima={st.reducido} />
           </button>
           <button className="icono" title="Pantalla completa (F)" onClick={pantallaCompleta}>
-            <svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" /></svg>
+            <IconoCromo n="pantalla" />
           </button>
           <button className={'icono menu-btn ' + (st.menu ? 'on' : '')} title="Menú (M)" onClick={() => st.set({ menu: !st.menu })} aria-expanded={st.menu}>
-            <svg viewBox="0 0 24 24"><path d={st.menu ? 'M6 6l12 12M18 6L6 18' : 'M4 8h16M4 16h10'} fill="none" /></svg>
+            <IconoCromo n={st.menu ? 'cerrar' : 'menu'} lima={st.menu} />
           </button>
         </div>
       </header>
@@ -132,14 +133,14 @@ export default function Chrome() {
         <AnimatePresence>
           {(st.historial.length > 0 || st.foco) && st.modo && (
             <motion.button className="volver" initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} onClick={volver}>
-              <svg viewBox="0 0 24 24"><path d="M14 6l-6 6 6 6" fill="none" /></svg>{st.foco ? 'Cerrar' : 'Regresar'}
+              <IconoCromo n={st.foco ? 'cerrar' : 'izq'} />{st.foco ? 'Cerrar' : 'Regresar'}
             </motion.button>
           )}
         </AnimatePresence>
         {st.modo && (
           <div className="flechas">
-            <button onClick={() => siguiente(-1)} aria-label="Anterior"><svg viewBox="0 0 24 24"><path d="M14 6l-6 6 6 6" fill="none" /></svg></button>
-            <button onClick={() => siguiente(1)} aria-label="Siguiente"><svg viewBox="0 0 24 24"><path d="M10 6l6 6-6 6" fill="none" /></svg></button>
+            <button onClick={() => siguiente(-1)} aria-label="Anterior"><IconoCromo n="izq" /></button>
+            <button onClick={() => siguiente(1)} aria-label="Siguiente"><IconoCromo n="der" lima /></button>
           </div>
         )}
       </div>

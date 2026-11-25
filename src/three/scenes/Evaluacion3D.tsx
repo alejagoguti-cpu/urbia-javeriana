@@ -11,9 +11,9 @@ import { MONO } from './Red';
 export default function Evaluacion3D() {
   const ind = useSt((s) => s.indicador);
   return (
-    <group position={[22, 0, 0]}>
+    <group position={[46, 0, -6]}>
       {INDICADORES.map((d, i) => <Medidor key={d.id} i={i} sel={ind === d.id} id={d.id} />)}
-      <mesh rotation-x={-Math.PI / 2}><ringGeometry args={[21.6, 22, 128]} /><meshBasicMaterial color="#304FFE" /></mesh>
+      <mesh rotation-x={-Math.PI / 2}><ringGeometry args={[21.6, 22, 128]} /><meshBasicMaterial color="#A99BCB" /></mesh>
     </group>
   );
 }
@@ -35,11 +35,11 @@ function Medidor({ i, sel, id }: { i: number; sel: boolean; id: string }) {
         onPointerOver={() => (document.body.dataset.cursor = 'activo')}
         onPointerOut={() => (document.body.dataset.cursor = '')}
       >
-        <mesh ref={anillo}><torusGeometry args={[3, 0.18, 12, 64]} /><meshStandardMaterial color={sel ? '#D5FF3F' : '#8C929C'} emissive={sel ? '#D5FF3F' : '#000'} emissiveIntensity={0.6} /></mesh>
-        <mesh><torusGeometry args={[3, 0.05, 6, 64, Math.PI * 2]} /><meshBasicMaterial color="#F4F3EF" wireframe /></mesh>
-        <mesh rotation-x={Math.PI / 2}><cylinderGeometry args={[2.2, 2.2, 0.2, 48, 1, true]} /><meshBasicMaterial color={sel ? '#304FFE' : '#1a1d24'} side={THREE.DoubleSide} transparent opacity={0.6} /></mesh>
+        <mesh ref={anillo}><torusGeometry args={[3, 0.18, 12, 64]} /><meshStandardMaterial color={sel ? '#C7FF27' : '#898D84'} emissive={sel ? '#C7FF27' : '#000'} emissiveIntensity={0.6} /></mesh>
+        <mesh><torusGeometry args={[3, 0.05, 6, 64, Math.PI * 2]} /><meshBasicMaterial color="#F5F3EB" wireframe /></mesh>
+        <mesh rotation-x={Math.PI / 2}><cylinderGeometry args={[2.2, 2.2, 0.2, 48, 1, true]} /><meshBasicMaterial color={sel ? '#A99BCB' : '#1a1d24'} side={THREE.DoubleSide} transparent opacity={0.6} /></mesh>
       </group>
-      <Text font={MONO} fontSize={1.1} color={sel ? '#D5FF3F' : '#8C929C'} position={[0, -1.6, 0]} anchorX="center">{String(i + 1).padStart(2, '0')}</Text>
+      <Text font={MONO} fontSize={1.1} color={sel ? '#C7FF27' : '#898D84'} position={[0, -1.6, 0]} anchorX="center">{String(i + 1).padStart(2, '0')}</Text>
     </group>
   );
 }
